@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tra cứu đơn hàng</title>
+<style>
+    :root {
+        color-scheme: light;
+        font-family: Inter, Arial, sans-serif;
+        font-size: 16px;
+        color: #111827;
+        background: #f6fbff;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        margin: 0;
+        background: #f6fbff;
+    }
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+    img {
+        max-width: 100%;
+        display: block;
+    }
+    button, input, select {
+        font: inherit;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+    #dt-header {
+        background: #ffffff;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    .dt-header-wrapper {
+        padding: 18px 0;
+    }
+    .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .header-main {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        flex: 1;
+        min-width: 0;
+        flex-wrap: wrap;
+    }
+    .logo img {
+        height: 40px;
+    }
+    .header-search {
+        flex: 1;
+        min-width: 240px;
+        max-width: 720px;
+    }
+    .dt-search-form {
+        position: relative;
+    }
+    .main-search input {
+        width: 100%;
+        height: 48px;
+        padding: 12px 52px 12px 16px;
+        border: 1px solid #d1d5db;
+        border-radius: 999px;
+        outline: none;
+        color: #111827;
+    }
+    .dt-search-form button {
+        position: absolute;
+        right: 6px;
+        top: 6px;
+        bottom: 6px;
+        border: none;
+        background: #111827;
+        color: #ffffff;
+        padding: 0 16px;
+        border-radius: 999px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .autocompleate-wrapper {
+        width: 100%;
+    }
+    .header-utility {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .header-utility a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+        color: #111827;
+    }
+    .header-utility img,
+    .header-utility svg {
+        width: 20px;
+        height: 20px;
+    }
+    .header-minicart {
+        position: relative;
+    }
+    .cart-count {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        width: 18px;
+        height: 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        background: #ef4444;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+    }
+    .site-main {
+        padding: 0;
+        background: #f6fbff;
+    }
+    .header-nav {
+        margin-top: 12px;
+        padding: 12px 0 0;
+        border-top: 2px solid #46e4f1;
+    }
+    .header-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .header-nav a {
+        color: #111827;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+    }
+    .header-nav a:hover {
+        color: #0081a8;
+    }
+    .page-hero {
+        padding: 56px 0 40px;
+        text-align: center;
+    }
+    .hero-content {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 0 16px;
+    }
+    .hero-title {
+        margin: 0 0 28px;
+        font-size: clamp(34px, 6vw, 52px);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #111827;
+    }
+    .hero-search-card {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 860px;
+        margin: 0 auto;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 999px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+    }
+    .hero-search-card input {
+        flex: 1;
+        min-width: 0;
+        border: 0;
+        padding: 18px 24px;
+        font-size: 16px;
+        outline: none;
+        color: #111827;
+    }
+    .hero-search-card button {
+        border: 0;
+        background: #111827;
+        color: #ffffff;
+        padding: 18px 36px;
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+    .hero-search-card button:hover {
+        opacity: 0.95;
+    }
+    .product-carousel-section {
+        background: #9ce8ff;
+        padding: 34px 0 38px;
+    }
+    .product-carousel-section .container {
+        max-width: 1200px;
+    }
+    .product--carousel {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 22px;
+    }
+    .product--carousel li {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 20px;
+        padding: 16px;
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+    .product--carousel img {
+        border-radius: 16px;
+        width: 100%;
+        height: auto;
+        margin-bottom: 14px;
+    }
+    .product--carousel h3 {
+        margin: 0 0 8px;
+        font-size: 15px;
+        font-weight: 700;
+        color: #111827;
+    }
+    .product--carousel .price {
+        color: #111827;
+        font-weight: 700;
+        font-size: 15px;
+    }
+    .feature-strip {
+        padding: 36px 0 48px;
+    }
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: #ffffff;
+        border-radius: 22px;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        padding: 22px;
+    }
+    .feature-item img {
+        width: 40px;
+        height: 40px;
+    }
+    .feature-item span {
+        font-weight: 700;
+        font-size: 14px;
+        color: #111827;
+    }
+    @media (max-width: 1080px) {
+        .feature-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+    @media (max-width: 760px) {
+        .header-inner {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .header-search {
+            width: 100%;
+        }
+        .header-utility {
+            width: 100%;
+            justify-content: flex-start;
+        }
+        .header-nav ul {
+            justify-content: flex-start;
+        }
+        .hero-search-card {
+            flex-direction: column;
+            border-radius: 20px;
+        }
+        .hero-search-card input,
+        .hero-search-card button {
+            width: 100%;
+            border-radius: 0;
+        }
+        .hero-search-card button {
+            border-top: 1px solid #e5e7eb;
+        }
+        .feature-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    .footer-top,
+    .footer-main,
+    .footer-bottom {
+        width: 100%;
+        color: #ffffff;
+    }
+    .footer-top {
+        background: #111827;
+        padding: 36px 24px;
+    }
+    .footer-top .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .footer-top-inner {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 20px;
+    }
+    .reinsurance-line {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 18px;
+        background: rgba(255,255,255,0.06);
+        border-radius: 18px;
+    }
+    .reinsurance-line__icon img {
+        width: 40px;
+        height: 32px;
+    }
+    .reinsurance-line__title {
+        font-size: 15px;
+        font-weight: 600;
+    }
+    .footer-main {
+        background: #0c0c0c;
+        padding: 48px 24px;
+    }
+    .footer-main .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .footer-tops {
+        margin-bottom: 32px;
+    }
+    .subscribe {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+    .footer-title {
+        margin: 0 0 14px;
+        font-size: 18px;
+    }
+    .btn--rounded {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        color: #0f172a;
+        border-radius: 999px;
+        padding: 12px 24px;
+        font-weight: 700;
+    }
+    .footer-main-inner {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 24px;
+    }
+    .footer-widgets {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .footer-widgets .footer-logo img {
+        max-width: 180px;
+        height: auto;
+    }
+    .footer-widgets .menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 10px;
+    }
+    .footer-widgets .menu li a {
+        color: #d1d5db;
+        font-size: 14px;
+    }
+    .follow-list {
+        display: grid;
+        gap: 8px;
+    }
+    .footer__socialink img {
+        width: 28px;
+        height: 28px;
+        vertical-align: middle;
+    }
+    .footer__slash {
+        display: none;
+    }
+    .info-footer {
+        padding-top: 20px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .info-footer .textwidget {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+    .info-footer a {
+        color: #f8fafc;
+    }
+    .footer-bottom {
+        background: #090a0c;
+        padding: 22px 24px 30px;
+    }
+    .footer-bottom-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+    .menu-footer-footer-cuoi-trang {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin: 0;
+        padding: 0;
+    }
+    .menu-footer-footer-cuoi-trang li a {
+        color: #94a3b8;
+        font-size: 14px;
+    }
+    .footer-bottom-inner p {
+        margin: 0;
+        color: #94a3b8;
+    }
+    @media (max-width: 1080px) {
+        .footer-top-inner,
+        .footer-main-inner {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+    @media (max-width: 760px) {
+        .container {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        .header-inner,
+        .footer-top .container,
+        .footer-main .container,
+        .footer-bottom .container {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .header-search {
+            max-width: 100%;
+        }
+        .header-inner {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .lookup-form {
+            flex-direction: column;
+        }
+        .lookup-form input,
+        .lookup-form button,
+        .coupon input,
+        .coupon button {
+            width: 100%;
+        }
+        .lookup-form button,
+        .coupon button {
+            margin-top: 12px;
+        }
+        .footer-top-inner,
+        .footer-main-inner {
+            grid-template-columns: 1fr;
+        }
+        .footer-top,
+        .footer-main,
+        .footer-bottom {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    }
+</style>
+</head>
+<body>
+<header id="dt-header">
+    <div class="dt-header-wrapper">
+        <div class="container">
+            <div class="header-inner">
+                <div class="header-main">
+                    <div class="logo">
+                        <a href="https://babolat.com.vn"><img src="https://babolat.com.vn/wp-content/uploads/2021/08/white-logo.svg" alt="Babolat"></a>
+                    </div>
+                    <div class="header-search">
+                        <div class="dt-search-form">
+                            <form role="search" method="get" class="woocommerce-product-search" action="#">
+                                <div class="main-search">
+                                    <div class="autocompleate-wrapper">
+                                        <input type="text" placeholder="Tìm kiếm" class="dt-search search-field form-control dt-autocompleate-input" />
+                                    </div>
+                                </div>
+                                <button type="reset" name="reset-button" class="reset-button" aria-label="Clear search">
+                                    <img class="icon" width="16" height="16" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/erase.svg" alt="Clear" />
+                                </button>
+                                <button type="submit" class="btn btn-theme radius-0" aria-label="Tìm kiếm">
+                                    <img class="icon" width="16" height="16" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/search.svg" alt="Search" />
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-utility">
+                    <a href="#minisearch" class="header-minisearch" aria-label="Tìm kiếm">
+                        <img class="icon" width="16" height="16" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/search.svg" alt="Search" />
+                    </a>
+                    <a href="#" title="Tìm cửa hàng" class="store-locator" aria-label="Tìm cửa hàng">
+                        <img class="icon" width="16" height="16" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/location.svg" alt="Location" />
+                    </a>
+                    <a href="#" aria-label="Tài khoản">
+                        <svg class="svg-inline icon-user" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+                            <path fill="none" stroke="#252323" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 19.811c-1.005-3.073-3.762-5.28-7.007-5.28-3.23 0-5.977 2.187-6.993 5.239m6.993-8.279a3.5 3.5 0 100-7 3.5 3.5 0 000 7z"></path>
+                        </svg>
+                    </a>
+                    <a class="minicart" href="#" aria-label="Giỏ hàng">
+                        <img class="icon" width="16" height="16" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/minicart.svg" alt="Cart" />
+                        <strong class="cart-count">1</strong>
+                    </a>
+                </div>
+                <nav class="header-nav" aria-label="Main navigation">
+                    <ul>
+                        <li><a href="#">Quần vợt</a></li>
+                        <li><a href="#">Cầu lông</a></li>
+                        <li><a href="#">Padel</a></li>
+                        <li><a href="#">Pickleball</a></li>
+                        <li><a href="#">Nam</a></li>
+                        <li><a href="#">Nữ</a></li>
+                        <li><a href="#">Thanh thiếu niên / Trẻ em</a></li>
+                        <li><a href="#">Sale</a></li>
+                        <li><a href="#">Giới thiệu</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<main id="dt-main-content" class="site-main" role="main">
+    <section class="page-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">TRA CỨU ĐƠN HÀNG</h1>
+            <form class="hero-search-card" action="#" method="get">
+                <input type="text" name="order" placeholder="Nhập mã đơn hàng bạn cần tra cứu" />
+                <button type="submit">Tra cứu</button>
+            </form>
+        </div>
+    </section>
+    <section class="product-carousel-section">
+        <div class="container">
+            <ul class="product--carousel">
+                <li>
+                    <img src="https://via.placeholder.com/350x350?text=Evo+Aero+Lite" alt="Evo Aero Lite Gen2 Unstrung" />
+                    <h3>Evo Aero Lite Gen2 Unstrung</h3>
+                    <span class="price">4,699,000 ₫</span>
+                </li>
+                <li>
+                    <img src="https://via.placeholder.com/350x350?text=Evo+Aero+Pink" alt="Evo Aero Lite Pink Gen2 Unstrung" />
+                    <h3>Evo Aero Lite Pink Gen2 Unstrung</h3>
+                    <span class="price">4,699,000 ₫</span>
+                </li>
+                <li>
+                    <img src="https://via.placeholder.com/350x350?text=Key+Ring+Thiem" alt="Player Key Ring Thiem" />
+                    <h3>Player Key Ring Thiem</h3>
+                    <span class="price">99,000 ₫</span>
+                </li>
+                <li>
+                    <img src="https://via.placeholder.com/350x350?text=Key+Ring+Nadal" alt="Player Key Ring Nadal" />
+                    <h3>Player Key Ring Nadal</h3>
+                    <span class="price">99,000 ₫</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="feature-strip">
+        <div class="feature-grid">
+            <div class="feature-item">
+                <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-delivery.svg" alt="Chính sách vận chuyển" />
+                <span>Chính sách vận chuyển</span>
+            </div>
+            <div class="feature-item">
+                <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-payment.svg" alt="Thanh toán an toàn" />
+                <span>Thanh toán an toàn</span>
+            </div>
+            <div class="feature-item">
+                <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-mail.svg" alt="Dịch vụ khách hàng" />
+                <span>Dịch vụ khách hàng thân thiết</span>
+            </div>
+            <div class="feature-item">
+                <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-returns.svg" alt="Chính sách đổi/trả hàng" />
+                <span>Chính sách đổi/trả hàng</span>
+            </div>
+        </div>
+    </section>
+</main>
+<footer id="dt-footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-top-inner column-4">
+                    <div class="reinsurance-line">
+                        <a href=" https://babolat.com.vn/chinh-sach-van-chuyen/">
+                            <div class="reinsurance-line__icon">
+                                <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-delivery.svg" width="40px" height="32px" class="attachment-full size-full" alt="Chính sách vận chuyển" loading="lazy">
+                            </div>
+                            <span class="reinsurance-line__title">Chính sách vận chuyển</span>
+                        </a>
+                    </div>
+                    <div class="reinsurance-line">
+                        <a href=" https://babolat.com.vn/#">
+                            <div class="reinsurance-line__icon">
+                                <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-payment.svg" width="40px" height="32px" class="attachment-full size-full" alt="Thanh toán an toàn" loading="lazy">
+                            </div>
+                            <span class="reinsurance-line__title">Thanh toán an toàn</span>
+                        </a>
+                    </div>
+                    <div class="reinsurance-line">
+                        <a href=" https://babolat.com.vn/#">
+                            <div class="reinsurance-line__icon">
+                                <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-mail.svg" width="40px" height="32px" class="attachment-full size-full" alt="Dịch vụ khách hàng thân thiết" loading="lazy">
+                            </div>
+                            <span class="reinsurance-line__title">Dịch vụ khách hàng thân thiết</span>
+                        </a>
+                    </div>
+                    <div class="reinsurance-line">
+                        <a href=" https://babolat.com.vn/#">
+                            <div class="reinsurance-line__icon">
+                                <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-returns.svg" width="40px" height="32px" class="attachment-full size-full" alt="Chính sách đổi/trả hàng" loading="lazy">
+                            </div>
+                            <span class="reinsurance-line__title">Chính sách đổi/trả hàng</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-main">
+            <div class="container">
+                <div class="footer-tops">
+                    <div class="footer-sub">
+                        <div id="custom_html-2" class="widget_text widget widget_custom_html">
+                            <div class="textwidget custom-html-widget">
+                                <div class="subscribe">
+                                    <h3 class="footer-title">Nhận tin mới nhất</h3>
+                                    <a class="btn btn--rounded" style="line-height: 2.6875rem;" href="https://babolat.com.vn/nhan-tin-khuyen-mai/">Đăng ký
+</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-main-inner column-4">
+                    <!-- FOOTER 1 -->
+                    <div class="footer-widgets footer-1">
+                        <div id="text-2" class="widget widget_text">
+                            <div class="textwidget">
+                                <div class="follow">
+                                    <h3 class="footer-title">Theo dõi chúng tôi</h3>
+                                    <div class="follow-list">
+                                        <span style="color: white; font-size: 15px; width: 90px;">Tennis</span>
+                                        <br/>
+                                        <a class="footer__socialink" href="https://www.facebook.com/BabolatVN.Official/" target="_blank" rel="nofollow noopener">
+                                            <img decoding="async" loading="lazy" title="Facebook Icon" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/Facebook.svg" alt="" width="40px" height="32px"/>
+                                        </a>
+                                        <span class="footer__slash">/</span>
+                                        <br/>
+                                        <a class="footer__socialink" href="https://www.instagram.com/babolat.vietnam/" target="_blank" rel="nofollow noopener">
+                                            <img decoding="async" loading="lazy" title="Instagram Icon" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/Instagram.svg" alt="" width="40px" height="32px"/>
+                                        </a>
+                                        <span class="footer__slash">/</span>
+                                        <br/>
+                                        <a class="footer__socialink" href="https://www.youtube.com/@babolatvietnam " target="_blank" rel="nofollow noopener">
+                                            <img decoding="async" loading="lazy" title="Youtube Icon" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/Youtube.svg" alt="" width="40px" height="32px"/>
+                                        </a>
+                                    </div>
+                                    <div class="follow-list">
+                                        <span style="color: white; font-size: 15px; width: 90px;">Pickleball</span>
+                                        <br/>
+                                        <a class="footer__socialink" href="https://www.facebook.com/Babolatpickleball " target="_blank" rel="nofollow noopener">
+                                            <img decoding="async" loading="lazy" title="Facebook Icon" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/Facebook.svg" alt="" width="40px" height="32px"/>
+                                        </a>
+                                        <span class="footer__slash">/</span>
+                                        <br/>
+                                        <a class="footer__socialink" href="https://www.instagram.com/babolat.vietnam/" target="_blank" rel="nofollow noopener">
+                                            <img decoding="async" loading="lazy" title="Instagram Icon" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/Instagram.svg" alt="" width="40px" height="32px"/>
+                                        </a>
+                                        <span class="footer__slash">/</span>
+                                        <br/>
+                                        <a class="footer__socialink" href="https://www.youtube.com/@babolatpickleball1921" target="_blank" rel="nofollow noopener">
+                                            <img decoding="async" loading="lazy" title="Youtube Icon" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/Youtube.svg" alt="" width="40px" height="32px"/>
+                                        </a>
+                                    </div>
+                                    <div class="follow-list">
+                                        <span style="color: white; font-size: 15px; width: 90px;">Padel</span>
+                                        <br/>
+                                        <a class="footer__socialink" href="https://www.facebook.com/BabolatVN.Official/" target="_blank" rel="nofollow noopener">
+                                            <img decoding="async" loading="lazy" title="Facebook Icon" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/Facebook.svg" alt="" width="40px" height="32px"/>
+                                        </a>
+                                        <span class="footer__slash">/</span>
+                                        <br/>
+                                        <a class="footer__socialink" href="https://www.instagram.com/babolat.vietnam/" target="_blank" rel="nofollow noopener">
+                                            <img decoding="async" loading="lazy" title="Instagram Icon" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/Instagram.svg" alt="" width="40px" height="32px"/>
+                                        </a>
+                                        <span class="footer__slash">/</span>
+                                        <br/>
+                                        <a class="footer__socialink" href="https://www.youtube.com/@babolatvietnam" target="_blank" rel="nofollow noopener">
+                                            <img decoding="async" loading="lazy" title="Youtube Icon" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/Youtube.svg" alt="" width="40px" height="32px"/>
+                                        </a>
+                                    </div>
+                                    <div class="follow-list">
+                                        <span style="color: white; font-size: 15px; width: 90px;">Badminton</span>
+                                        <br/>
+                                        <a class="footer__socialink" href="https://www.facebook.com/babolatbadminton" target="_blank" rel="nofollow noopener">
+                                            <img decoding="async" loading="lazy" title="Facebook Icon" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/Facebook.svg" alt="" width="40px" height="32px"/>
+                                        </a>
+                                        <span class="footer__slash">/</span>
+                                        <br/>
+                                        <a class="footer__socialink" href="https://www.instagram.com/babolatbadminton.vietnam/" target="_blank" rel="nofollow noopener">
+                                            <img decoding="async" loading="lazy" title="Instagram Icon" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/Instagram.svg" alt="" width="40px" height="32px"/>
+                                        </a>
+                                        <br/>
+                                        <span class="footer__slash">/</span>
+                                        <br/>
+                                        <a class="footer__socialink" href="https://www.youtube.com/@babolatvietnam" target="_blank" rel="nofollow noopener">
+                                            <img decoding="async" loading="lazy" title="Youtube Icon" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/Youtube.svg" alt="" width="40px" height="32px"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-logo">
+                            <a href="https://babolat.com.vn">
+                                <img width="178" height="49" src="https://babolat.com.vn/wp-content/uploads/2021/08/white-logo.svg" alt="Babolat Viet Nam"/>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- FOOTER 2 -->
+                    <div class="footer-widgets footer-2">
+                        <div id="nav_menu-2" class="widget widget_nav_menu">
+                            <span class="widget-title">Danh mục</span>
+                            <div class="menu-footer-danh-muc-container">
+                                <ul id="menu-footer-danh-muc" class="menu">
+                                    <li id="menu-item-134" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat current-product-ancestor current-menu-parent current-product-parent menu-item-134">
+                                        <a href="https://babolat.com.vn/danh-muc-san-pham/tennis/vot-tennis/">
+                                            <span>Vợt Tennis</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-1120" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1120">
+                                        <a href="https://babolat.com.vn/danh-muc-san-pham/tennis/day-dan-tennis/">
+                                            <span>Dây đan</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-1121" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1121">
+                                        <a href="https://babolat.com.vn/danh-muc-san-pham/tennis/giay/">
+                                            <span>Giày tennis</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-1122" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1122">
+                                        <a href="https://babolat.com.vn/danh-muc-san-pham/cau-long/vot-cau-long/">
+                                            <span>Vợt cầu lông</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-1123" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1123">
+                                        <a href="https://babolat.com.vn/danh-muc-san-pham/cau-long/qua-cau-long/">
+                                            <span>Quả cầu</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-1126" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1126">
+                                        <a href="https://babolat.com.vn/danh-muc-san-pham/cau-long/giay-cau-long/">
+                                            <span>Giày cầu lông</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-1124" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1124">
+                                        <a href="https://babolat.com.vn/danh-muc-san-pham/padel/vot-padel/">
+                                            <span>Vợt Padel</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-1125" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1125">
+                                        <a href="https://babolat.com.vn/danh-muc-san-pham/padel/giay-padel/">
+                                            <span>Giày</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-1127" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1127">
+                                        <a href="https://babolat.com.vn/danh-muc-san-pham/padel/banh-padel/">
+                                            <span>Banh</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-1128" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1128">
+                                        <a href="https://babolat.com.vn/danh-muc-san-pham/nam/">
+                                            <span>Nam</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-1129" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1129">
+                                        <a href="https://babolat.com.vn/danh-muc-san-pham/nu/">
+                                            <span>Nữ</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-1130" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-1130">
+                                        <a href="https://babolat.com.vn/danh-muc-san-pham/thanh-thieu-nien-tre-em-1/">
+                                            <span>Thanh thiếu niên / Trẻ em</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FOOTER 3 -->
+                    <div class="footer-widgets footer-3">
+                        <div id="nav_menu-3" class="widget widget_nav_menu">
+                            <span class="widget-title">Trợ giúp</span>
+                            <div class="menu-footer-tro-giup-container">
+                                <ul id="menu-footer-tro-giup" class="menu">
+                                    <li id="menu-item-1134" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1134">
+                                        <a href="https://babolat.com.vn/faq/">
+                                            <span>Liên hệ với chúng tôi</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-3390" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3390">
+                                        <a href="https://babolat.com.vn/tim-san-pham-phu-hop/?g=tennis">
+                                            <span>Kích thước sản phẩm</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-1133" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1133">
+                                        <a href="https://babolat.com.vn/tim-cua-hang/">
+                                            <span>Địa chỉ đại lý</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="text-6" class="widget widget_text">
+                            <div class="textwidget">
+                                <div>
+                                    <a href="http://online.gov.vn/Home/WebDetails/104400?AspxAutoDetectCookieSupport=1" target="_blank" rel="nofollow noopener" data-schema-attribute="">
+                                        <img decoding="async" loading="lazy" width="300" height="114" class="alignnone wp-image-9827" src="https://babolat.com.vn/wp-content/uploads/2023/05/thong-bao-bo-cong-thuong.webp" alt="" style="max-width:160px;padding: 15px 0"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FOOTER 3 -->
+                    <div class="footer-widgets footer-4">
+                        <div id="nav_menu-4" class="widget widget_nav_menu">
+                            <span class="widget-title">Về chúng tôi</span>
+                            <div class="menu-footer-gioi-thieu-container">
+                                <ul id="menu-footer-gioi-thieu" class="menu">
+                                    <li id="menu-item-1112" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1112">
+                                        <a href="https://babolat.com.vn/lich-su-babolat/">
+                                            <span>Lịch sử</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-1135" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1135">
+                                        <a href="https://babolat.com.vn/chuyen-nghiep/">
+                                            <span>Chuyên nghiệp</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-7328" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7328">
+                                        <a href="https://babolat.com.vn/danh-muc/cong-dong/">
+                                            <span>Cộng đồng</span>
+                                        </a>
+                                    </li>
+                                    <li id="menu-item-7327" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7327">
+                                        <a href="https://babolat.com.vn/co-hoi-nghe-nghiep/">
+                                            <span>Cơ hội nghề nghiệp</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- FOOTER 3 -->
+                <div class="footer-widgets info-footer" style="width: 100%;max-width: 100%;padding: 20px 0;">
+                    <div id="custom_html-4" class="widget_text widget widget_custom_html">
+                        <div class="textwidget custom-html-widget">
+                            <div style="color: white;font-size: 15px">
+                                Công ty TNHH Thương Mại Thể Thao Hồng Ân.
+Nhà phân phối độc quyền thương hiệu Babolat tại Việt Nam
+Địa chỉ: 98 Lâm Văn Bền, Phường Tân Hưng, Tp. Hồ Chí Minh
+Email: <a href="mailto:info@hongansports.com">info@hongansports.com</a>
+                                Mã số thuế: 0315883253, Ngày cấp 09/09/2019 bởi Chi cục Thuế khu vực Quận 7 - huyện Nhà Bè
+Hotline: <a href="tel:0896691279">0896 691 279</a>
+                                - <a href="tel:02836368186">028 3636 8186</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="language-switch" style="color:white">
+                    <div class="language-selector-dropdown">
+                        <span class="language-selected">
+                            <img width="16" height="16" src="https://babolat.com.vn/wp-content/plugins/polylang-pro/vendor/wpsyntex/polylang/flags/vn.png" alt="Tiếng Việt">
+                            <span class="language-title">Tiếng Việt</span>
+                        </span>
+                        <div class="language-list">
+                            <div class="language-item">
+                                <a href="https://babolat.com.vn/san-pham/evo-aero-lite-gen2-unstrung/">
+                                    <img width="16" height="16" src="https://babolat.com.vn/wp-content/plugins/polylang-pro/vendor/wpsyntex/polylang/flags/vn.png" alt="Tiếng Việt">
+                                    <span class="language-title">Tiếng Việt</span>
+                                </a>
+                            </div>
+                            <div class="language-item">
+                                <a href="https://babolat.com.vn/en/">
+                                    <img width="16" height="16" src="https://babolat.com.vn/wp-content/plugins/polylang-pro/vendor/wpsyntex/polylang/flags/gb.png" alt="English">
+                                    <span class="language-title">English</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-inner">
+                    <div id="nav_menu-6" class="widget widget_nav_menu">
+                        <div class="menu-footer-footer-cuoi-trang-container">
+                            <ul id="menu-footer-footer-cuoi-trang" class="menu">
+                                <li id="menu-item-1147" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-1147">
+                                    <a rel="privacy-policy" href="https://babolat.com.vn/chinh-sach-bao-mat/">
+                                        <span>Chính sách bảo mật</span>
+                                    </a>
+                                </li>
+                                <li id="menu-item-7058" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7058">
+                                    <a href="https://babolat.com.vn/chinh-sach-thanh-toan/">
+                                        <span>Chính sách thanh toán</span>
+                                    </a>
+                                </li>
+                                <li id="menu-item-6909" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6909">
+                                    <a href="https://babolat.com.vn/chinh-sach-doi-tra/">
+                                        <span>Chính sách đổi trả</span>
+                                    </a>
+                                </li>
+                                <li id="menu-item-9250" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9250">
+                                    <a href="https://babolat.com.vn/chinh-sach-giao-hang/">
+                                        <span>Chính sách giao, kiểm tra hàng</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="text-4" class="widget widget_text">
+                        <div class="textwidget">
+                            <p>©Babolat</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div id="pum-13914" class="pum pum-overlay pum-theme-9439 pum-theme-content-only popmake-overlay pum-click-to-close auto_open click_open" data-popmake="{&quot;id&quot;:13914,&quot;slug&quot;:&quot;popup-evo-va-pure-drive&quot;,&quot;theme_id&quot;:9439,&quot;cookies&quot;:[{&quot;event&quot;:&quot;on_popup_close&quot;,&quot;settings&quot;:{&quot;name&quot;:&quot;pum-13914&quot;,&quot;key&quot;:&quot;&quot;,&quot;session&quot;:null,&quot;path&quot;:true,&quot;time&quot;:&quot;1 hours&quot;}}],&quot;triggers&quot;:[{&quot;type&quot;:&quot;auto_open&quot;,&quot;settings&quot;:{&quot;cookie_name&quot;:[&quot;pum-13914&quot;],&quot;delay&quot;:&quot;100&quot;}},{&quot;type&quot;:&quot;click_open&quot;,&quot;settings&quot;:{&quot;extra_selectors&quot;:&quot;&quot;,&quot;cookie_name&quot;:null}}],&quot;mobile_disabled&quot;:null,&quot;tablet_disabled&quot;:null,&quot;meta&quot;:{&quot;display&quot;:{&quot;stackable&quot;:false,&quot;overlay_disabled&quot;:false,&quot;scrollable_content&quot;:false,&quot;disable_reposition&quot;:false,&quot;size&quot;:&quot;medium&quot;,&quot;responsive_min_width&quot;:&quot;0%&quot;,&quot;responsive_min_width_unit&quot;:false,&quot;responsive_max_width&quot;:&quot;100%&quot;,&quot;responsive_max_width_unit&quot;:false,&quot;custom_width&quot;:&quot;300px&quot;,&quot;custom_width_unit&quot;:false,&quot;custom_height&quot;:&quot;380px&quot;,&quot;custom_height_unit&quot;:false,&quot;custom_height_auto&quot;:&quot;1&quot;,&quot;location&quot;:&quot;center&quot;,&quot;position_from_trigger&quot;:false,&quot;position_top&quot;:&quot;0&quot;,&quot;position_left&quot;:&quot;0&quot;,&quot;position_bottom&quot;:&quot;10&quot;,&quot;position_right&quot;:&quot;10&quot;,&quot;position_fixed&quot;:false,&quot;animation_type&quot;:&quot;fade&quot;,&quot;animation_speed&quot;:&quot;350&quot;,&quot;animation_origin&quot;:&quot;bottom&quot;,&quot;overlay_zindex&quot;:false,&quot;zindex&quot;:&quot;1999999999&quot;},&quot;close&quot;:{&quot;text&quot;:&quot;&quot;,&quot;button_delay&quot;:&quot;0&quot;,&quot;overlay_click&quot;:&quot;1&quot;,&quot;esc_press&quot;:&quot;1&quot;,&quot;f4_press&quot;:false},&quot;click_open&quot;:[]}}" role="dialog" aria-modal="false">
+        <div id="popmake-13914" class="pum-container popmake theme-9439 pum-responsive pum-responsive-medium responsive size-medium">
+            <div class="pum-content popmake-content" tabindex="0">
+                <p>
+                    <img decoding="async" loading="lazy" class="aligncenter size-full wp-image-22760" src="https://babolat.com.vn/wp-content/uploads/2024/02/popup-babolat-thang-3.jpg" alt="" width="1920" height="1080" srcset="https://babolat.com.vn/wp-content/uploads/2024/02/popup-babolat-thang-3.jpg 1920w, https://babolat.com.vn/wp-content/uploads/2024/02/popup-babolat-thang-3-560x315.jpg 560w, https://babolat.com.vn/wp-content/uploads/2024/02/popup-babolat-thang-3-850x478.jpg 850w" sizes="(max-width: 1920px) 100vw, 1920px"/>
+                </p>
+            </div>
+            <button type="button" class="pum-close popmake-close" aria-label="Close">x			</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        (function() {
+            var c = document.body.className;
+            c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+            document.body.className = c;
+        }
+        )();
+    </script>
+    <script type="text/javascript" src="https://babolat.com.vn/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=5.7.7" id="swv-js"></script>
+    <script type="text/javascript" id="contact-form-7-js-extra">
+        /* <![CDATA[ */
+        var wpcf7 = {
+            "api": {
+                "root": "https:\/\/babolat.com.vn\/_wp-json\/",
+                "namespace": "contact-form-7\/v1"
+            }
+        };
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="https://babolat.com.vn/wp-content/plugins/contact-form-7/includes/js/index.js?ver=5.7.7" id="contact-form-7-js"></script>
+    <script type="text/javascript" id="kk-star-ratings-js-extra">
+        /* <![CDATA[ */
+        var kk_star_ratings = {
+            "action": "kk-star-ratings",
+            "endpoint": "https:\/\/babolat.com.vn\/_wp-admin\/admin-ajax.php",
+            "nonce": "39feefdf54"
+        };
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="https://babolat.com.vn/wp-content/plugins/kk-star-ratings/src/core/public/js/kk-star-ratings.min.js?ver=5.4.5" id="kk-star-ratings-js"></script>
+    <script type="text/javascript" src="https://babolat.com.vn/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.7.9.0" id="jquery-blockui-js"></script>
+    <script type="text/javascript" id="wc-add-to-cart-js-extra">
+        /* <![CDATA[ */
+        var wc_add_to_cart_params = {
+            "ajax_url": "\/wp-admin\/admin-ajax.php",
+            "wc_ajax_url": "\/?wc-ajax=%%endpoint%%",
+            "i18n_view_cart": "Xem giỏ hàng",
+            "cart_url": "https:\/\/babolat.com.vn\/gio-hang\/",
+            "is_cart": "1",
+            "cart_redirect_after_add": "no"
+        };
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="https://babolat.com.vn/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=7.9.0" id="wc-add-to-cart-js"></script>
+    <script type="text/javascript" src="https://babolat.com.vn/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4-wc.7.9.0" id="js-cookie-js"></script>
+    <script type="text/javascript" id="woocommerce-js-extra">
+        /* <![CDATA[ */
+        var woocommerce_params = {
+            "ajax_url": "\/wp-admin\/admin-ajax.php",
+            "wc_ajax_url": "\/?wc-ajax=%%endpoint%%"
+        };
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="https://babolat.com.vn/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=7.9.0" id="woocommerce-js"></script>
+    <script type="text/javascript" id="wc-country-select-js-extra">
+        /* <![CDATA[ */
+        var wc_country_select_params = {
+            "countries": ...
+        };
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="https://babolat.com.vn/wp-content/plugins/woocommerce/assets/js/frontend/country-select.min.js?ver=7.9.0" id="wc-country-select-js"></script>
+    <script type="text/javascript" id="wc-address-i18n-js-extra">
+        /* <![CDATA[ */
+        var wc_address_i18n_params = {
+            "locale_fields": ...
+        };
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="https://babolat.com.vn/wp-content/plugins/woocommerce/assets/js/frontend/address-i18n.min.js?ver=7.9.0" id="wc-address-i18n-js"></script>
+    <script type="text/javascript" id="wc-cart-js-extra">
+        /* <![CDATA[ */
+        var wc_cart_params = {
+            "ajax_url": "\/wp-admin\/admin-ajax.php",
+            "wc_ajax_url": "\/?wc-ajax=%%endpoint%%",
+            "update_shipping_method_nonce": "edcdb9f701",
+            "apply_coupon_nonce": "6cd98cb7d7",
+            "remove_coupon_nonce": "c423a4af1b"
+        };
+        /* ]]> */
+    </script>
+    <script type="text/javascript" src="https://babolat.com.vn/wp-content/plugins/woocommerce/assets/js/frontend/cart.min.js?ver=7.9.0" id="wc-cart-js"></script>
+    <script type="text/javascript" src="https://babolat.com.vn/wp-content/plugins/woocommerce/assets/js/frontend/selectWoo/selectWoo.full.min.js?ver=1.0.9-wc.7.9.0" id="selectWoo-js"></script>
+    <script type="text/javascript" src="https://babolat.com.vn/wp-includes/js/underscore.min.js?ver=1.13.4" id="underscore-js"></script>
+    <script type="text/javascript" id="wp-util-js-extra">
+        /* <![CDATA[ */
+        var _wpUtilSettings = {
+            "ajax": {
+                "url": "\/wp-admin\/admin-ajax.php"
+            }
+        };
+        /* ]]> */
+    </script>
+</body>
+</html>

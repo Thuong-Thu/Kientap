@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thanh toán - Babolat Viet Nam</title>
+<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="../assets/fontend.css">
+<link rel="stylesheet" href="../assets/select2.css">
+<link rel="stylesheet" href="../assets/selectfooter.css">
+<style>
+body { font-family: Arial, sans-serif; background-color: #f8f8f8; margin: 0; }
+.header { text-align:center; padding:20px; border-bottom:1px solid #e0e0e0; }
+.header img { height:80px; }
+.container { max-width:1200px; margin:30px auto 0; display:flex; gap:20px; flex-wrap: wrap; }
+.order-info { flex:2; background:#fff; padding:20px; border-radius:6px; }
+.payment-method { flex:1; background:#fff; padding:20px; border-radius:6px; text-align:center; }
+.payment-method .method { display:inline-block; margin:10px; padding:20px; border:1px solid #ddd; border-radius:6px; cursor:pointer; }
+.payment-method .method.selected { border-color:#000; }
+.payment-method button { margin-top:20px; padding:10px 30px; background:#000; color:#fff; border:none; border-radius:4px; cursor:pointer; }
+.order-item { display:flex; gap:20px; border:1px solid #ccc; border-radius:6px; padding:10px; margin-bottom:10px; background:#fff; }
+.order-item img { width:auto; max-width:150px; max-height:220px; height:auto; object-fit:contain; }
+.order-item-details { flex:1; }
+.order-summary table { width:100%; border-collapse:collapse; margin-top:20px; }
+.order-summary td { padding:5px 0; }
+.order-summary td.value { text-align:right; }
+.order-summary .total { font-weight:bold; color:red; }
+
+        /* Footer layout */
+        footer#dt-footer {
+            background:#FFFFFF;
+            color:#333;
+            font-size:16px;
+            border-top:10px solid #fff;
+        }
+
+        footer#dt-footer .footer-top .container,
+        footer#dt-footer .footer-bottom .container {
+            max-width:1200px;
+            margin:0 auto;
+            padding:0 20px;
+        }
+
+        footer#dt-footer .footer-top-inner {
+            display:flex;
+            justify-content:space-between;
+            gap:20px;
+            flex-wrap:wrap;
+            padding:30px 0 20px;
+            border-bottom:4px solid #3dd9e3;
+        }
+
+        footer#dt-footer .reinsurance-line {
+            flex:1;
+            min-width:180px;
+            background:#fff;
+            border-radius:10px;
+            padding:25px;
+            text-align:center;
+            border-left:1px solid rgba(0,0,0,0.08);
+        }
+
+        footer#dt-footer .reinsurance-line:first-child {
+            border-left:none;
+        }
+
+        footer#dt-footer .reinsurance-line a {
+            color:#333;
+            text-decoration:none;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:10px;
+        }
+
+        footer#dt-footer .reinsurance-line__icon img {
+            display:block;
+            max-width:42px;
+            height:auto;
+        }
+
+        footer#dt-footer .reinsurance-line__title {
+            display:block;
+            font-size:15px;
+            font-weight:600;
+        }
+
+        footer#dt-footer .footer-bottom-inner {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:20px;
+            flex-wrap:wrap;
+            padding:30px 0;
+            font-size:16px;
+        }
+
+        footer#dt-footer .widget_nav_menu .menu {
+            display:flex;
+            flex-wrap:wrap;
+            gap:20px;
+            list-style:none;
+            padding:0;
+            margin:0;
+        }
+
+        footer#dt-footer .widget_nav_menu .menu-item a {
+            color:#fff;
+            text-decoration:none;
+            transition:color .2s ease;
+        }
+
+        footer#dt-footer .widget_nav_menu .menu-item a:hover {
+            color:#f3c;
+        }
+
+        footer#dt-footer .widget_text p {
+            margin:0;
+        }
+</style>
+</head>
+<body>
+<div class="header">
+    <img src="https://babolat.com.vn/wp-content/uploads/2026/03/1-e1774607603166.png" alt="Babolat Logo">
+</div>
+
+<div class="container">
+    <!-- Thông tin đơn hàng -->
+    <div class="order-info">
+        <h2>THÔNG TIN ĐƠN HÀNG</h2>
+        <p><strong>Mã đơn hàng:</strong> 23108</p>
+        <p><strong>Ngày tạo:</strong> 16/05/2026</p>
+        <h3>Thông tin người nhận:</h3>
+        <p>Họ tên: Nguyễn Văn A</p>
+        <p>Địa chỉ: Linh Trung, Thủ Đức, TP.HCM</p>
+        <p>SĐT: 0948.558.670</p>
+        <p>Email: anguyen@gmail.com</p>
+        <p>Ghi chú: Không</p>
+
+        <h3>Chi tiết sản phẩm:</h3>
+        <div class="order-item">
+            <img src="https://babolat.com.vn/wp-content/uploads/2026/04/101564-EVO_AERO_LITE_GEN2-100-1-Face.png" alt="Evo Aero Lite Gen2 Unstrung">
+            <div class="order-item-details">
+                <p><strong>Evo Aero Lite Gen2 Unstrung</strong></p>
+                <p>Màu: Xám | Xanh lá mạ</p>
+                <p>Kích cỡ cán vợt: 2</p>
+                <p>Giá: 4,699,000₫</p>
+                <p>Số lượng: 1</p>
+                <p>Thành tiền: 4,699,000₫</p>
+            </div>
+        </div>
+
+        <div class="order-summary">
+            <table>
+                <tr>
+                    <td>Tạm tính:</td>
+                    <td class="value">4,699,000₫</td>
+                </tr>
+                <tr>
+                    <td>Phương thức vận chuyển:</td>
+                    <td class="value">Giao tiêu chuẩn</td>
+                </tr>
+                <tr>
+                    <td>Phí vận chuyển:</td>
+                    <td class="value">40,000₫</td>
+                </tr>
+                <tr class="total">
+                    <td>Tổng:</td>
+                    <td class="value">4,739,000₫</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Phương thức thanh toán -->
+    <div class="payment-method">
+        <h3>CHỌN PHƯƠNG THỨC CHUYỂN KHOẢN</h3>
+        <div class="method" data-method="momo">
+            <img src="https://images.seeklogo.com/logo-png/42/1/momo-logo-png_seeklogo-425716.png" alt="MoMo" style="height: 135px;">
+            <p><i>Ví điện tử MoMo</i></p>
+        </div>
+        <div class="method" data-method="vnpay">
+            <img src="https://cdn.9pay.vn/cong-thanh-toan-vnpay-qr-1686903110.jpg" alt="VNPay" style="height: 135px;">
+            <p><i>QR VNPay</i></p>
+        </div>
+        <button id="confirm-payment">Xác nhận</button>
+    </div>
+</div>
+
+<script src="../assets/add-to-cart.min.js"></script>
+<script>
+jQuery(document).ready(function($){
+    $('.payment-method .method').click(function(){
+        $('.payment-method .method').removeClass('selected');
+        $(this).addClass('selected');
+    });
+
+    $('#confirm-payment').click(function(){
+        var selected = $('.payment-method .method.selected').data('method');
+        if(!selected){
+            alert('Vui lòng chọn phương thức thanh toán!');
+            return;
+        }
+        alert('Thanh toán bằng ' + selected + ' sẽ được thực hiện!');
+        // redirect đến cổng thanh toán thật
+    });
+});
+</script>
+
+<!-- Giữ nguyên footer -->
+<footer id="dt-footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="footer-top-inner column-4">
+                <div class="reinsurance-line">
+                    <a href="https://babolat.com.vn/chinh-sach-van-chuyen/">
+                        <div class="reinsurance-line__icon">
+                            <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-delivery.svg" width="40px" height="32px" alt="Chính sách vận chuyển">
+                        </div>
+                        <span class="reinsurance-line__title">Chính sách vận chuyển</span>
+                    </a>
+                </div>
+                <div class="reinsurance-line">
+                    <a href="https://babolat.com.vn/chinh-sach-thanh-toan/">
+                        <div class="reinsurance-line__icon">
+                            <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-payment.svg" width="40px" height="32px" alt="Thanh toán an toàn">
+                        </div>
+                        <span class="reinsurance-line__title">Thanh toán an toàn</span>
+                    </a>
+                </div>
+                <div class="reinsurance-line">
+                    <a href="https://babolat.com.vn/#">
+                        <div class="reinsurance-line__icon">
+                            <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-mail.svg" width="40px" height="32px" alt="Dịch vụ khách hàng thân thiết">
+                        </div>
+                        <span class="reinsurance-line__title">Dịch vụ khách hàng thân thiết</span>
+                    </a>
+                </div>
+                <div class="reinsurance-line">
+                    <a href="https://babolat.com.vn/chinh-sach-doi-tra/">
+                        <div class="reinsurance-line__icon">
+                            <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-returns.svg" width="40px" height="32px" alt="Chính sách đổi/trả hàng">
+                        </div>
+                        <span class="reinsurance-line__title">Chính sách đổi/trả hàng</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-bottom-inner">
+                <div id="nav_menu-6" class="widget widget_nav_menu">
+                    <ul class="menu">
+                        <li class="menu-item"><a href="https://babolat.com.vn/chinh-sach-bao-mat/">Chính sách bảo mật</a></li>
+                        <li class="menu-item"><a href="https://babolat.com.vn/chinh-sach-thanh-toan/">Chính sách thanh toán</a></li>
+                        <li class="menu-item"><a href="https://babolat.com.vn/chinh-sach-doi-tra/">Chính sách đổi trả</a></li>
+                        <li class="menu-item"><a href="https://babolat.com.vn/chinh-sach-giao-hang/">Chính sách giao, kiểm tra hàng</a></li>
+                    </ul>
+                </div>
+                <div class="widget widget_text">
+                    <p>©Babolat</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

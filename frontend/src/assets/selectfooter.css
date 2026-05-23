@@ -1,0 +1,78 @@
+#dt-footer {
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+.footer-top {
+    padding: 20px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.footer-top-inner {
+    display: flex;
+    justify-content: flex-start; /* căn từ trái sang phải */
+    align-items: flex-start;      /* text nằm ngay dưới icon */
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    padding: 30px 100px;
+    gap: 50px; /* khoảng cách giữa các icon */
+}
+
+.reinsurance-line {
+    flex: 0 0 auto;
+    text-align: left;
+    margin-bottom: 15px;
+    margin: 0 20px; /* khoảng cách giữa các icon */
+}
+
+.reinsurance-line__icon img {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin: 0 auto 8px ;
+    margin-bottom: 10px;
+}
+
+.reinsurance-line__title {
+    display: block;
+    font-size: 14px;
+    color: #000;
+}
+
+.footer-bottom {
+    padding: 15px 0;
+    background-color: #222;
+    color: #fff;
+}
+
+.footer-bottom-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.footer-bottom-inner .menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-bottom-inner .menu li {
+    margin-right: 20px;
+}
+
+.footer-bottom-inner .menu li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.footer-bottom-inner .widget_text p {
+    margin: 0;
+    font-size: 13px;
+}

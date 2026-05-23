@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thanh toán VNPay</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6fb;
+    margin: 0;
+    padding: 0;
+    color: #1f2937;
+}
+* {
+    box-sizing: border-box;
+}
+.page-shell {
+    max-width: auto;
+    margin: 0 auto;
+    padding: 0 20px 0;
+}
+.topbar {
+       display: flex;
+
+       justify-content: space-between;
+       gap: 24px;
+       padding: 18px 24px;
+       background: #ffffff;
+       /* extend to match .page-shell inner width (page-shell has 20px horizontal padding) */
+       width: calc(100% + 40px);
+       margin: 0 -20px 0;
+       box-sizing: border-box;
+}
+.topbar-left,
+.topbar-center,
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.topbar-left {
+    min-width: 240px;
+}
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: #1d4ed8;
+    text-decoration: none;
+    font-size: 18px;
+    border: 1px solid #dbeafe;
+}
+.topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    
+}
+.topbar-logo img {
+    height: 60px;
+}
+
+.topbar-logo-text span {
+    font-size: 12px;
+    color: #2563eb;
+    font-weight: 700;
+}
+.topbar-center {
+    flex: 1;
+    justify-content: center;
+}
+.topbar-center img {
+    height: 70px;
+}
+.topbar-right {
+    justify-content: flex-end;
+}
+.timer-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    text-align: right;
+}
+.timer-info span {
+    color: #475569;
+    font-size: 13px;
+}
+.timer-pill {
+    min-width: 96px;
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: #0f172a;
+    color: #ffffff;
+    font-weight: 700;
+    text-align: center;
+}
+.alert-banner {
+    margin: 24px 0;
+    padding: 16px 20px;
+    background: #fff7ed;
+    border: 1px solid #ffddb6;
+    border-radius: 16px;
+    color: #92400e;
+    font-size: 14px;
+    text-align: center;
+    line-height: 1.7;
+}
+.main-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 30px;
+    align-items: start;
+}
+.card {
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+    padding: 28px;
+}
+.order-card {
+    background: #eff6ff;
+    border: 1px solid #d7eafc;
+}
+.card-title {
+    margin: 0 0 16px;
+    font-size: 25px;
+    text-align: center;
+    font-weight: 700;
+}
+.card-divider {
+    height: 1px;
+    background: #d9e7fb;
+    border: none;
+    margin: 0 0 22px;
+}
+.order-detail {
+    display: grid;
+    gap: 18px;
+}
+.order-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 12px 0;
+}
+.order-row:last-child {
+    padding-bottom: 0;
+}
+.order-label {
+    color: #475569;
+    font-size: 15px;
+    line-height: 1.0;
+}
+.order-value {
+    text-align: left;
+    font-size: 18px;
+    font-weight: 600;
+    color: #21262C;
+    line-height: 1.7;
+}
+.order-value.amount {
+    color: #2563eb;
+    font-size: 25px;
+}
+.order-value.multiline {
+    font-size: 18px;
+    font-weight: 500;
+    color: #241920;
+    white-space: pre-wrap;
+    text-align: left;
+}
+.payment-card {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.payment-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #2563eb;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+.payment-hint::before {
+    content: "i";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #dbeafe;
+    color: #2563eb;
+    font-size: 12px;
+}
+.qr-panel {
+    padding: 24px;
+    border-radius: 20px;
+    background: #ffffff;
+    border: 1px solid #dbeafe;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+.qr-panel img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+}
+.qr-caption {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2563eb;
+}
+.action-group {
+    display: grid;
+    gap: 14px;
+    margin-top: 6px;
+}
+.button {
+    width: 100%;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.button-secondary {
+    background: #F5F7F9;
+    color: #111827;
+}
+.button-primary {
+    background: #A9C1DB;
+    color: #ffffff;
+}
+.footer {
+    margin-top: 38px;
+    padding: 0;
+    font-size: 13px;
+    color: #64748b;
+    background: #F9F9F9;
+    border-radius: 0;
+    /* make full-bleed under the page-shell similar to topbar */
+    width: calc(100% + 40px);
+    margin: 0 -20px 0;
+    box-sizing: border-box;
+    height: 106px;
+    display: flex;
+    align-items: center;
+}
+.footer-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+.footer-left {
+    text-align: left;
+}
+.footer-center {
+    text-align: center;
+    line-height: 1.25;
+}
+.footer-right {
+    text-align: right;
+}
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.footer-logo img {
+    height: 26px;
+    display: block;
+}
+.footer-logo img.small-mobile {
+    height: 20px;
+}
+.footer a {
+    color: #2563eb;
+    text-decoration: none;
+}
+@media (max-width: 1024px) {
+    .main-grid {
+        grid-template-columns: 1fr;
+    }
+    .topbar {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+    .topbar-left,
+    .topbar-center,
+    .topbar-right {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+    .order-row {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+    .order-value,
+    .order-value.multiline {
+        text-align: left;
+    }
+}
+</style>
+</head>
+<body>
+<div class="page-shell">
+    <div class="topbar">
+        <div class="topbar-left">
+            <a class="back-link" href="#" title="Quay lại">←</a>
+            <div class="topbar-logo">
+                <img src="../../public/logovnpay.png" alt="VNPay QR">
+            </div>
+        </div>
+        <div class="topbar-center">
+            <img src="https://babolat.com.vn/wp-content/uploads/2026/03/1-e1774607603166.png" alt="Babolat Logo">
+        </div>
+        <div class="topbar-right">
+            <div class="timer-info">
+                <span>Giao dịch hết hạn sau</span>
+                <div class="timer-pill">12 : 29</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert-banner">
+        Quý khách vui lòng không tắt trình duyệt cho đến khi hoàn tất giao dịch trên website. Trường hợp đã thanh toán nhưng chưa nhận kết quả giao dịch, vui lòng bấm "Tại đây" để nhận kết quả. Xin cảm ơn!
+    </div>
+
+    <div class="main-grid">
+        <section class="card order-card">
+            <h2 class="card-title" style="text-align: left">Thông tin đơn hàng</h2>
+            <hr class="card-divider">
+            <div class="order-detail">
+                <div class="order-row">
+                    <div class="order-label">Số tiền thanh toán</div>
+                    <div class="order-value amount">4.739.000 VND</div>
+                </div>
+                <div class="order-row">
+                    <div class="order-label">Giá trị đơn hàng</div>
+                    <div class="order-value">4.739.000 VND</div>
+                </div>
+                <div class="order-row">
+                    <div class="order-label">Phí giao dịch</div>
+                    <div class="order-value">0 VND</div>
+                </div>
+                <div class="order-row">
+                    <div class="order-label">Mã đơn hàng</div>
+                    <div class="order-value">45310227</div>
+                </div>
+                <div class="order-row">
+                    <div class="order-label">Nội dung giao dịch</div>
+                    <div class="order-value multiline">Babolat Việt Nam Mã đơn hàng 23108</div>
+                </div>
+                <div class="order-row">
+                    <div class="order-label">Nhà cung cấp</div>
+                    <div class="order-value multiline">CÔNG TY TNHH THƯƠNG MẠI THỂ THAO HỒNG ÂN - BABOLAT VIỆT NAM</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card payment-card">
+            <h2 class="card-title">Quét mã qua App Ngân hàng / Ví điện tử</h2>
+            <a class="payment-hint" href="#">Hướng dẫn thanh toán</a>
+            <div class="qr-panel">
+                <img src="../../public/qr.png" alt="Mã QR VNPay">
+                <div class="qr-caption">Scan to Pay</div>
+            </div>
+            <div class="action-group">
+                <button class="button button-secondary">Hủy thanh toán</button>
+                <button class="button button-primary">Kiểm tra đơn hàng</button>
+            </div>
+        </section>
+    </div>
+
+    <div class="footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <span>Phát triển bởi VNPAY © 2026</span>
+            </div>
+            <div class="footer-center">
+                <div>Hỗ trợ khách hàng</div>
+                <div>1900 55 55 77 · <a href="mailto:hotrovnpay@vnpay.vn">hotrovnpay@vnpay.vn</a></div>
+            </div>
+            <div class="footer-right">
+                <div class="footer-logo">
+                    <img src="../../public/global-sign 1.png" alt="Secure GlobalSign">
+                    <img src="../../public/pci dss 1.png" alt="PCI DSS Compliant">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
