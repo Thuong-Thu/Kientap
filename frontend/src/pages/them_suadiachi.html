@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thanh toán - Thêm/Sửa địa chỉ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Roboto:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/them_suadiachi.css" />
+</head>
+<body>
+  <div class="checkout-page">
+    <header class="checkout-header">
+      <a class="checkout-logo" href="trangchu.html" aria-label="Babolat">
+        <img src="https://babolat.com.vn/wp-content/uploads/2026/03/1-e1774607603166.png" alt="Babolat" />
+      </a>
+    </header>
+
+    <main>
+      <h1 class="checkout-title">Thanh toán</h1>
+
+      <nav class="checkout-nav" aria-label="Tiến trình thanh toán">
+        <div class="checkout-steps">
+          <a class="checkout-step" href="./giohang.html">
+            <span>Giỏ hàng</span>
+            <strong>1</strong>
+          </a>
+          <div class="checkout-step is-current" aria-current="step">
+            <span>Thanh toán</span>
+            <strong>2</strong>
+          </div>
+          <div class="checkout-step">
+            <span>Hoàn thành</span>
+            <strong>3</strong>
+          </div>
+        </div>
+      </nav>
+
+      <section class="checkout-shell" data-screen="checkout">
+        <div class="checkout-wrapper">
+          <section class="checkout-left" aria-labelledby="billing-title">
+            <form class="checkout-form">
+              <h2 id="billing-title" class="form-section-title">Thông tin thanh toán</h2>
+
+              <div class="field">
+                <label for="billing-name">Họ tên <span class="required">*</span></label>
+                <input id="billing-name" name="billing-name" type="text" autocomplete="name" required />
+              </div>
+
+              <div class="field">
+                <label for="address-trigger">Địa chỉ <span class="required">*</span></label>
+                <div class="address-select" data-address-select data-screen="address-list">
+                  <button id="address-trigger" class="address-select-trigger" type="button" data-address-trigger>
+                    <span class="address-select-placeholder" data-address-value>Chọn địa chỉ</span>
+                    <span class="address-select-caret" aria-hidden="true"></span>
+                  </button>
+                  <div class="address-dropdown" data-address-dropdown></div>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="billing-phone">Số điện thoại <span class="required">*</span></label>
+                <input id="billing-phone" name="billing-phone" type="tel" autocomplete="tel" required />
+              </div>
+
+              <div class="radio-group">
+                <p class="radio-title">Phương thức vận chuyển</p>
+                <div class="radio-list">
+                  <label class="radio-line">
+                    <input type="radio" name="shipping" value="fast" />
+                    <span>Giao nhanh</span>
+                  </label>
+                  <label class="radio-line">
+                    <input type="radio" name="shipping" value="standard" checked />
+                    <span>Giao tiêu chuẩn</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="order-note">Ghi chú đơn hàng</label>
+                <textarea id="order-note" name="order-note" placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay chỉ dẫn địa điểm giao hàng chi tiết hơn."></textarea>
+              </div>
+
+              <div class="radio-group">
+                <p class="radio-title">Phương thức thanh toán</p>
+                <div class="radio-list">
+                  <label class="radio-line">
+                    <input type="radio" name="payment" value="cod" />
+                    <span>Trả tiền mặt khi nhận hàng</span>
+                  </label>
+                  <label class="radio-line">
+                    <input type="radio" name="payment" value="bank" checked />
+                    <span>Chuyển khoản</span>
+                  </label>
+                </div>
+              </div>
+
+              <button class="place-order" type="button">Đặt hàng</button>
+            </form>
+          </section>
+
+          <aside class="checkout-right" aria-labelledby="order-title">
+            <h2 id="order-title" class="order-title">Thông tin đơn hàng</h2>
+
+            <div class="order-totals">
+              <div class="total-row">
+                <span>Tạm tính</span>
+                <span>4,699,000₫</span>
+              </div>
+              <div class="total-row">
+                <span>Phí vận chuyển</span>
+                <span>40,000₫</span>
+              </div>
+              <div class="total-row total">
+                <span>Tổng</span>
+                <span>4,739,000₫</span>
+              </div>
+            </div>
+
+            <p class="review-title">1 sản phẩm</p>
+
+            <article class="cart-card">
+              <div class="cart-product">
+                <img src="https://www.figma.com/api/mcp/asset/5fc3e172-11f7-46bf-8d2c-8c8ff79a883e" alt="Evo Aero Lite Gen2 Unstrung" />
+                <div>
+                  <h3>Evo Aero Lite Gen2 Unstrung</h3>
+                  <dl>
+                    <dt>Màu sắc:</dt>
+                    <dd>Xám | Xanh lá mạ</dd>
+                    <dt>Kích cỡ cán vợt:</dt>
+                    <dd>2</dd>
+                  </dl>
+                </div>
+              </div>
+
+              <div class="cart-price-row">
+                <div class="cart-price-cell">
+                  <span>Đơn giá</span>
+                  <strong>4,699,000₫</strong>
+                </div>
+                <strong class="cart-qty">1</strong>
+                <div class="cart-price-cell">
+                  <span>Thành tiền</span>
+                  <strong>4,699,000₫</strong>
+                </div>
+              </div>
+            </article>
+
+            <section class="payment-policy" aria-labelledby="policy-title">
+              <h3 id="policy-title" class="policy-heading">Chính sách thanh toán</h3>
+              <div class="policy-row">
+                <strong>≤ 1.000.000 VNĐ</strong>
+                <span>Thanh toán <em>100%</em> khi nhận hàng</span>
+              </div>
+              <div class="policy-row">
+                <strong>1.000.000 - 3.000.000 VNĐ</strong>
+                <span>Đặt cọc <em>300.000 VNĐ</em></span>
+              </div>
+              <div class="policy-row">
+                <strong>3.000.000 - 6.000.000 VNĐ</strong>
+                <span>Đặt cọc <em>500.000 VNĐ</em></span>
+              </div>
+              <div class="policy-row">
+                <strong>&gt; 6.000.000 VNĐ</strong>
+                <span>Đặt cọc <em>50%</em> giá trị đơn hàng</span>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <section class="benefits-bar" aria-label="Chính sách">
+      <div class="benefit-item">
+        <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-delivery.svg" alt="" />
+        <span>Chính sách vận chuyển</span>
+      </div>
+      <div class="benefit-item">
+        <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-payment.svg" alt="" />
+        <span>Thanh toán an toàn</span>
+      </div>
+      <div class="benefit-item">
+        <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-mail.svg" alt="" />
+        <span>Dịch vụ khách hàng thân thiết</span>
+      </div>
+      <div class="benefit-item">
+        <img src="https://babolat.com.vn/wp-content/uploads/2021/06/icon-returns.svg" alt="" />
+        <span>Chính sách đổi/trả hàng</span>
+      </div>
+    </section>
+
+    <footer class="checkout-footer">
+      <div class="checkout-footer-inner">
+        <div class="checkout-footer-links">
+          <a href="https://babolat.com.vn/chinh-sach-bao-mat/">Chính sách bảo mật</a>
+          <a href="https://babolat.com.vn/chinh-sach-thanh-toan/">Chính sách thanh toán</a>
+          <a href="https://babolat.com.vn/chinh-sach-doi-tra/">Chính sách đổi trả</a>
+          <a href="https://babolat.com.vn/chinh-sach-giao-kiem-tra-hang/">Chính sách giao, kiểm tra hàng</a>
+        </div>
+        <span class="checkout-copy">©Babolat</span>
+      </div>
+    </footer>
+
+    <div class="floating-buttons" aria-label="Liên hệ nhanh">
+      <a href="tel:0896691279" class="float-btn" title="Gọi điện">
+        <img src="https://babolat.com.vn/wp-content/themes/b6/assets/images/call-outline.svg" alt="Gọi điện" />
+      </a>
+      <a href="https://m.me/BabolatVN.Official" target="_blank" rel="noreferrer" class="float-btn" title="Messenger">
+        <img src="https://babolat.com.vn/wp-content/themes/b6/assets/images/facebook-messenger.svg" alt="Messenger" />
+      </a>
+    </div>
+
+    <div class="recaptcha-badge" aria-hidden="true">
+      <img src="https://www.figma.com/api/mcp/asset/7e57b317-8980-4aa3-a8ea-1e679675a6d8" alt="" />
+      <span>protected by reCAPTCHA</span>
+    </div>
+
+    <div class="modal-backdrop" data-address-modal>
+      <section class="address-modal" role="dialog" aria-modal="true" aria-labelledby="address-modal-title">
+        <div class="modal-header">
+          <h2 id="address-modal-title" data-modal-title>Thêm địa chỉ mới</h2>
+          <button class="modal-close" type="button" aria-label="Đóng" data-modal-close>×</button>
+        </div>
+
+        <form data-address-form data-screen="address-form">
+          <div class="modal-grid">
+            <div class="field">
+              <label for="modal-name">Họ tên <span class="required">*</span></label>
+              <input id="modal-name" name="name" type="text" required />
+            </div>
+
+            <div class="field">
+              <label for="modal-phone">Số điện thoại <span class="required">*</span></label>
+              <input id="modal-phone" name="phone" type="tel" required />
+            </div>
+
+            <div class="field field-full">
+              <label>Địa chỉ <span class="required">*</span></label>
+              <div class="address-location-grid">
+                <div class="select-control">
+                  <select id="modal-city" name="city" required>
+                    <option value="" disabled selected>Tỉnh/TP</option>
+                    <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                    <option value="Hà Nội">Hà Nội</option>
+                    <option value="Đà Nẵng">Đà Nẵng</option>
+                  </select>
+                </div>
+
+                <div class="select-control">
+                  <select id="modal-district" name="district" required>
+                    <option value="" disabled selected>Quận/Huyện</option>
+                    <option value="Quận 1">Quận 1</option>
+                    <option value="Quận 7">Quận 7</option>
+                    <option value="Quận Bình Thạnh">Quận Bình Thạnh</option>
+                  </select>
+                </div>
+
+                <div class="select-control">
+                  <select id="modal-ward" name="ward" required>
+                    <option value="" disabled selected>Phường/Xã</option>
+                    <option value="Phường Tân Hưng">Phường Tân Hưng</option>
+                    <option value="Phường Bến Nghé">Phường Bến Nghé</option>
+                    <option value="Phường Võ Thị Sáu">Phường Võ Thị Sáu</option>
+                    <option value="Phường Cầu Ông Lãnh">Phường Cầu Ông Lãnh</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="field field-full">
+              <input id="modal-street" name="street" type="text" placeholder="Địa chỉ chi tiết" required />
+            </div>
+
+            <label class="default-check field-full">
+              <input type="checkbox" name="isDefault" />
+              <span>Đặt làm địa chỉ mặc định</span>
+            </label>
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn-secondary" type="button" data-modal-close>Hủy</button>
+            <button class="btn-primary" type="submit" data-modal-submit>Lưu địa chỉ</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+
+  <script src="../assets/them_suadiachi.js"></script>
+</body>
+</html>

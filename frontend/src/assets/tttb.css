@@ -1,0 +1,168 @@
+.payment-failed-main {
+    background: #fff;
+  font-family:  system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', Arial, sans-serif;
+    border-top: 4px solid #5ee7ef;
+}
+
+.payment-failed-main .container {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+.payment-failed-section {
+    background: #fff;
+    min-height: 700px;
+    padding: 200px 0 150px;
+}
+
+.payment-failed-content {
+    text-align: center;
+}
+
+.failed-icon {
+    width: 78px;
+    height: 78px;
+    margin: 0 auto 34px;
+    background: linear-gradient(180deg, #ff6b55 0%, #d71945 100%);
+    border-radius: 50%;
+    box-shadow: inset 0 4px 8px rgba(255,255,255,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.failed-icon span {
+    color: #fff;
+    font-size: 74px;
+    font-weight: 700;
+    line-height: 0.8;
+    transform: translateY(-3px);
+}
+
+.payment-failed-title {
+    margin: 0 0 34px;
+    font-size: 28px;
+    line-height: 1.2;
+    color: #111;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.payment-failed-desc {
+    margin: 0 auto 45px;
+    max-width: 650px;
+    color: #111;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.payment-failed-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 85px;
+}
+
+.failed-btn {
+    width: 165px;
+    height: 48px;
+    padding: 0;
+    background: #000;
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Roboto', Arial, sans-serif;
+
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    line-height: 1;
+}
+
+.failed-btn:hover {
+    background: #222;
+    color: #fff;
+}
+
+.call-fixed,
+.messenger-fixed {
+    position: fixed;
+    right: 28px;
+    width: 46px;
+    height: 46px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+}
+
+.call-fixed {
+    top: 52%;
+}
+
+.messenger-fixed {
+    top: calc(52% + 62px);
+}
+
+.call-fixed img,
+.messenger-fixed img {
+    width: 18px;
+    height: 18px;
+}
+
+@media screen and (max-width: 768px) {
+    .payment-failed-section {
+        min-height: 460px;
+        padding: 90px 20px;
+    }
+
+    .failed-icon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 26px;
+    }
+
+    .failed-icon span {
+        font-size: 62px;
+    }
+
+    .payment-failed-title {
+        font-size: 22px;
+        margin-bottom: 24px;
+    }
+
+    .payment-failed-desc {
+        font-size: 13px;
+        margin-bottom: 34px;
+    }
+
+    .payment-failed-actions {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+
+}
+.payment-failed-actions .failed-btn,
+.payment-failed-actions a,
+.payment-failed-actions button {
+    width: 165px !important;
+    height: 48px !important;
+    padding: 0 !important;
+
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    font-family: 'Roboto', Arial, sans-serif !important;
+
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    line-height: 1 !important;
+}

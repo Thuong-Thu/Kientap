@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giỏ hàng – Babolat</title>
+  <link rel="stylesheet" href="../assets/huy-don-hang.css" />
+  <link rel="stylesheet" href="../assets/giohang.css" />
+  <style>
+    .header-minicart { position: relative; overflow: visible !important; }
+    .header-icons { overflow: visible !important; }
+    .custom-minicart-ui {
+      position: absolute;
+      top: 45px;
+      right: 0;
+      width: 380px;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      border-radius: 4px;
+      z-index: 999999;
+      display: none;
+      padding: 20px;
+      font-family: 'Roboto', Arial, sans-serif;
+    }
+    .header-minicart.is-open .custom-minicart-ui { display: block; }
+    .custom-minicart-ui::before {
+      content: "";
+      position: absolute;
+      top: -8px; right: 20px;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid #63e5ec;
+    }
+    .custom-minicart-ui::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: #63e5ec;
+      border-radius: 4px 4px 0 0;
+    }
+    .mini-cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .mini-cart-title { font-size: 16px; font-weight: 700; margin: 0; color: #111; }
+    .mini-cart-total-items { font-size: 14px; color: #555; margin-left: auto; margin-right: 15px; }
+    .mini-cart-close { background: none; border: none; font-size: 20px; font-weight: bold; cursor: pointer; color: #111; padding: 0; line-height: 1; }
+    .mini-cart-product-box {
+      border: 1px solid #eee;
+      border-radius: 6px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+    .mini-cart-item-top { display: flex; gap: 15px; }
+    .mini-cart-item-img { width: 50px; height: 70px; object-fit: contain; }
+    .mini-cart-item-info { flex: 1; }
+    .mini-cart-item-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .mini-cart-item-name { font-size: 14px; font-weight: 700; color: #111; margin: 0; line-height: 1.3; }
+    .mini-cart-remove { background: none; border: none; font-size: 16px; cursor: pointer; color: #999; padding: 0; }
+    .mini-cart-remove:hover { color: #f00; }
+    .mini-cart-item-meta { display: grid; gap: 4px; font-size: 13px; color: #555; }
+    .mini-cart-line { height: 1px; background: #eee; margin: 15px 0; }
+    .mini-cart-item-bottom { display: flex; justify-content: space-between; align-items: center; }
+    .mini-cart-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0 15px;
+      font-size: 15px;
+    }
+    .mini-cart-summary span { color: #111; }
+    .mini-cart-summary strong { font-size: 16px; font-weight: 700; color: #111; }
+    .mini-cart-view-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%; height: 44px;
+      background: #000; color: #fff;
+      font-size: 13px; font-weight: 700; text-transform: uppercase;
+      text-decoration: none; border: none; cursor: pointer;
+      margin-bottom: 12px;
+    }
+    .mini-cart-view-btn:hover { background: #222; color: #fff; }
+    .mini-cart-continue {
+      display: block; width: 100%; text-align: center;
+      background: none; border: none; color: #555;
+      font-size: 13px; text-decoration: underline; cursor: pointer;
+    }
+    .mini-cart-continue:hover { color: #111; }
+    .mini-cart-empty { text-align: center; padding: 30px 0; color: #555; font-size: 14px; }
+
+    .account-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .account-dropdown {
+      position: absolute;
+      top: 100%;
+      right: -10px;
+      width: 220px;
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      border-radius: 4px;
+      display: none; 
+      z-index: 9999;
+      margin-top: 15px;
+      padding: 10px 0;
+    }
+
+    .account-dropdown.is-open {
+      display: block;
+    }
+
+    .account-dropdown::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      right: 15px;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid #ffffff;
+    }
+
+    .account-dropdown a, .account-dropdown button {
+      display: block;
+      padding: 10px 20px;
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+      text-align: left;
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .account-dropdown a:hover, .account-dropdown button:hover {
+      background: #f8f8f8;
+      color: #2563eb;
+    }
+
+    .user-info-box {
+      padding: 10px 20px;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 5px;
+    }
+
+    .user-info-box strong {
+      display: block;
+      font-size: 14px;
+      color: #000;
+      word-break: break-all;
+    }
+
+    .logout-btn {
+      color: #ff4d4f !important;
+      font-weight: bold;
+    }
+
+    .header-icons {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      overflow: visible !important;
+    }
+
+    /* Nút thanh toán */
+    .checkout-btn {
+      cursor: pointer;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+  </style>
+  <style>
+    body, * { font-family: 'Roboto', Arial, sans-serif !important; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-top">
+
+      <a href="trangchu.html" class="header-logo">
+        <img src="https://babolat.com.vn/wp-content/uploads/2026/03/1-e1774607603166.png" alt="Babolat" />
+      </a>
+
+      <div class="header-search">
+        <img class="icon-search" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/search.svg" alt="Tìm kiếm" />
+        <input type="text" placeholder="Tìm kiếm" />
+      </div>
+
+      <div class="header-icons">
+        <a href="tracuu.html" title="Tra cứu đơn hàng">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+            <rect x="4" y="3" width="16" height="18" rx="2" stroke="#252323" stroke-width="2"/>
+            <path d="M8 8h8M8 12h8M8 16h5" stroke="#252323" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </a>
+
+        <a href="https://babolat.com.vn/tim-cua-hang/">
+          <img class="icon-vector" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/location.svg" alt="Cửa hàng" title="Cửa hàng" />
+        </a>
+
+        <div class="account-wrap" id="account-wrap">
+          <a href="javascript:void(0)" id="account-trigger">
+            <svg class="icon-account" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24">
+              <path fill="none" stroke="#252323" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 19.811c-1.005-3.073-3.762-5.28-7.007-5.28-3.23 0-5.977 2.187-6.993 5.239m6.993-8.279a3.5 3.5 0 100-7 3.5 3.5 0 000 7z"/>
+            </svg>
+          </a>
+          <div class="account-dropdown" id="account-dropdown">
+          </div>
+        </div>
+
+        <div class="header-minicart" id="header-minicart" style="position:relative;display:inline-flex;align-items:center;overflow:visible;">
+          <a class="minicart" href="gio-hang.html" id="minicart-toggle" style="position:relative;display:inline-flex;align-items:center;">
+            <img class="icon" width="16" height="16" src="https://babolat.com.vn/wp-content/themes/b6/assets/images/minicart.svg" alt="Giỏ hàng" />
+            <strong class="cart-count" id="cart-count" style="
+              display:inline-flex;align-items:center;justify-content:center;
+              min-width:18px;height:18px;padding:0 4px;
+              background:#63e5ec;color:#000;font-size:11px;font-weight:700;
+              border-radius:9px;position:absolute;top:-6px;right:-8px;
+              line-height:1;
+            ">0</strong>
+          </a>
+          <div class="mini-cart-dropdown custom-minicart-ui">
+            <div id="minicart-wrapper">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <nav class="nav-bar">
+      <ul>
+        <li><a href="quanvot.html">Quần vợt</a></li>
+        <li><a href="#">Cầu lông</a></li>
+        <li><a href="#">Padel</a></li>
+        <li><a href="#">Pickleball</a></li>
+        <li><a href="#">Nam</a></li>
+        <li><a href="#">Nữ</a></li>
+        <li><a href="#">Thanh thiếu niên / Trẻ em</a></li>
+        <li><a href="#">Sale</a></li>
+        <li><a href="#">Giới thiệu</a></li>
+      </ul>
+</nav>
+  </header>
+
+  <main id="dt-main-content" class="site-main" role="main">
+    <div class="container">
+        <h1 class="default-page-title">Giỏ hàng</h1>
+
+        <style>
+          .checkout-nav {
+            margin: 0 auto 32px;
+            max-width: 660px;
+          }
+          .checkout-steps {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            position: relative;
+          }
+          .checkout-steps::before {
+            content: '';
+            position: absolute;
+            top: calc(14px + 8px + 20px);
+            left: calc(50% / 3 - 20px);
+            right: calc(50% / 3 - 20px);
+            height: 2px;
+            background: #63e5ec;
+            z-index: 0;
+          }
+          .checkout-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            z-index: 1;
+          }
+          .checkout-step__label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #252323;
+            text-align: center;
+            line-height: 1;
+          }
+          .checkout-step__count {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            border: 2px solid #63e5ec;
+            background: #fff;
+            color: #252323;
+          }
+          .checkout-step.active .checkout-step__count {
+            background: #252323;
+            border-color: #252323;
+            color: #fff;
+          }
+          .checkout-step.active .checkout-step__label {
+            font-weight: 700;
+          }
+          .disable-cursor {
+            cursor: default;
+            pointer-events: none;
+            text-decoration: none;
+            color: inherit;
+          }
+        </style>
+
+        <nav class="checkout-nav" aria-label="Tiến trình thanh toán">
+          <div class="checkout-steps">
+            <div class="checkout-step active" aria-current="step">
+              <a href="gio-hang.html" style="display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;color:inherit;">
+                <span class="checkout-step__label">Giỏ hàng</span>
+                <span class="checkout-step__count">1</span>
+              </a>
+            </div>
+            <div class="checkout-step">
+              <a href="#" class="disable-cursor" style="display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;color:inherit;">
+                <span class="checkout-step__label">Thanh toán</span>
+                <span class="checkout-step__count">2</span>
+              </a>
+            </div>
+            <div class="checkout-step">
+              <a href="#" class="disable-cursor" style="display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;color:inherit;">
+                <span class="checkout-step__label">Hoàn thành</span>
+                <span class="checkout-step__count">3</span>
+              </a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="cart-wrapper">
+            <form class="woocommerce-cart-form">
+                <div class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" id="cart-items-container">
+                    <p style="text-align:center; padding:50px;">Đang tải sản phẩm...</p>
+                </div>
+            </form>
+
+            <aside class="cart-right">
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Tạm tính</span>
+                        <strong id="subtotal">0₫</strong>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Tổng</span>
+                        <strong id="grand-total">0₫</strong>
+                    </div>
+                </div>
+
+                <div class="cart-actions">
+                    <a href="trangchu.html" class="continue-shopping">‹ TIẾP TỤC MUA HÀNG</a>
+                    <button type="button" class="checkout-btn" id="btn-main-checkout">
+                        THANH TOÁN
+                    </button>
+                </div>
+            </aside>
+        </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <div class="footer-links">
+          <a href="#">Chính sách bảo mật</a>
+          <a href="#">Chính sách thanh toán</a>
+          <a href="#">Chính sách đổi trả</a>
+        </div>
+        <span class="footer-copy">©Babolat Việt Nam</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/giohang.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const accountWrap = document.getElementById('account-wrap');
+      const accountDropdown = document.getElementById('account-dropdown');
+      const checkoutBtn = document.getElementById('btn-main-checkout');
+
+      function getCurrentUser() {
+        return JSON.parse(localStorage.getItem('currentUser'));
+      }
+
+      function updateAccountPopup() {
+        const user = getCurrentUser();
+        if (user) {
+          accountDropdown.innerHTML = `
+            <div class="user-info-box">
+              <span>Xin chào,</span>
+              <strong>${user.fullname || user.hoTen || 'Thành viên'}</strong>
+            </div>
+            <a href="tai-khoan.html">Thông tin tài khoản</a>
+            <a href="tracuu.html">Đơn hàng của tôi</a>
+            <button class="logout-btn" id="btn-logout">Đăng xuất</button>
+          `;
+          
+          document.getElementById('btn-logout').onclick = function() {
+            localStorage.removeItem('currentUser');
+            window.location.reload();
+          };
+        } else {
+          accountDropdown.innerHTML = `
+            <a href="dangnhap.html">Đăng nhập</a>
+            <a href="dangky.html">Đăng ký thành viên</a>
+            <hr style="border:none; border-top:1px solid #eee; margin:5px 0;">
+            <a href="tracuu.html">Tra cứu nhanh đơn hàng</a>
+          `;
+        }
+      }
+
+      accountWrap.addEventListener('click', function(e) {
+        e.stopPropagation();
+        accountDropdown.classList.toggle('is-open');
+      });
+
+      document.addEventListener('click', function() {
+        accountDropdown.classList.remove('is-open');
+      });
+
+      if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', function() {
+          const user = getCurrentUser();
+          
+          if (user && user.id) {
+            window.location.href = 'thanhtoandangnhap.html';
+          } else {
+            window.location.href = 'thanhtoan.html';
+          }
+        });
+      }
+
+      updateAccountPopup();
+    });
+  </script>
+  <script src="../components/hover-minicart.js"></script>
+</body>
+</html>

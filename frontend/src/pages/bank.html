@@ -1,213 +1,227 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thanh toán - Babolat Viet Nam</title>
 <link rel="stylesheet" href="../assets/styles.css">
-<link rel="stylesheet" href="../assets/fontend.css">
-<link rel="stylesheet" href="../assets/select2.css">
+<link rel="stylesheet" href="../components/fontend.css">
+<link rel="stylesheet" href="../components/select2.css">
 <link rel="stylesheet" href="../assets/selectfooter.css">
+<link rel="stylesheet" href="../assets/thanhtoan.css">
 <style>
-body { font-family: Arial, sans-serif; background-color: #f8f8f8; margin: 0; }
-.header { text-align:center; padding:20px; border-bottom:1px solid #e0e0e0; }
-.header img { height:80px; }
-.container { max-width:1200px; margin:30px auto 0; display:flex; gap:20px; flex-wrap: wrap; }
-.order-info { flex:2; background:#fff; padding:20px; border-radius:6px; }
-.payment-method { flex:1; background:#fff; padding:20px; border-radius:6px; text-align:center; }
-.payment-method .method { display:inline-block; margin:10px; padding:20px; border:1px solid #ddd; border-radius:6px; cursor:pointer; }
-.payment-method .method.selected { border-color:#000; }
-.payment-method button { margin-top:20px; padding:10px 30px; background:#000; color:#fff; border:none; border-radius:4px; cursor:pointer; }
-.order-item { display:flex; gap:20px; border:1px solid #ccc; border-radius:6px; padding:10px; margin-bottom:10px; background:#fff; }
-.order-item img { width:auto; max-width:150px; max-height:220px; height:auto; object-fit:contain; }
-.order-item-details { flex:1; }
-.order-summary table { width:100%; border-collapse:collapse; margin-top:20px; }
-.order-summary td { padding:5px 0; }
-.order-summary td.value { text-align:right; }
-.order-summary .total { font-weight:bold; color:red; }
 
-        /* Footer layout */
-        footer#dt-footer {
-            background:#FFFFFF;
-            color:#333;
-            font-size:16px;
-            border-top:10px solid #fff;
-        }
 
-        footer#dt-footer .footer-top .container,
-        footer#dt-footer .footer-bottom .container {
-            max-width:1200px;
-            margin:0 auto;
-            padding:0 20px;
-        }
+body { background-color: #ffffff !important; font-family: 'Roboto', Arial, sans-serif !important; margin: 0 !important; color: #222 !important; }
 
-        footer#dt-footer .footer-top-inner {
-            display:flex;
-            justify-content:space-between;
-            gap:20px;
-            flex-wrap:wrap;
-            padding:30px 0 20px;
-            border-bottom:4px solid #3dd9e3;
-        }
+.header { text-align:center !important; padding:15px !important; background:#fff !important; border-bottom:1px solid #e5e5e5 !important; }
+.header img { height: 40px !important; object-fit: contain !important; }
 
-        footer#dt-footer .reinsurance-line {
-            flex:1;
-            min-width:180px;
-            background:#fff;
-            border-radius:10px;
-            padding:25px;
-            text-align:center;
-            border-left:1px solid rgba(0,0,0,0.08);
-        }
+.bank-page-heading { text-align: center !important; margin-top: 35px !important; margin-bottom: 30px !important; }
+.bank-page-title { font-size: 22px !important; font-weight: 700 !important; margin: 0 0 8px 0 !important; text-transform: uppercase !important; color: #111 !important; }
+.bank-page-alert { color: #d32f2f !important; font-style: italic !important; font-size: 14px !important; margin: 0 !important; }
 
-        footer#dt-footer .reinsurance-line:first-child {
-            border-left:none;
-        }
+#bank-layout {
+    max-width: 1180px !important;
+    margin: 0 auto 60px auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 40px !important;
+    align-items: flex-start !important;
+    padding: 0 30px !important;
+    box-sizing: border-box !important;
+}
 
-        footer#dt-footer .reinsurance-line a {
-            color:#333;
-            text-decoration:none;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            gap:10px;
-        }
+#order-info-container {
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    font-size: 14px !important;
+    color: #333 !important;
+    padding-left: 120px !important;
+}
 
-        footer#dt-footer .reinsurance-line__icon img {
-            display:block;
-            max-width:42px;
-            height:auto;
-        }
+#order-info-container .info-row { display: flex !important; margin-bottom: 12px !important; line-height: 1.6 !important; }
+#order-info-container .info-label { width: 150px !important; min-width: 150px !important; font-weight: 700 !important; color: #111 !important; font-size: 13px !important; }
+#order-info-container .info-value { flex: 1 !important; color: #444 !important; font-size: 13px !important; }
+#order-info-container .section-title { font-size: 14px !important; font-weight: 700 !important; color: #111 !important; margin: 25px 0 15px 0 !important; border: none !important; padding: 0 !important; background: none !important; }
 
-        footer#dt-footer .reinsurance-line__title {
-            display:block;
-            font-size:15px;
-            font-weight:600;
-        }
+#order-info-container .product-item {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 20px !important;
+    border: 1px solid #e5e5e5 !important;
+    border-radius: 8px !important;
+    padding: 18px !important;
+    margin-bottom: 15px !important;
+    background: #fff !important;
+    box-sizing: border-box !important;
+}
+#order-info-container .product-item img {
+    width: 100px !important;
+    height: 130px !important;
+    object-fit: contain !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+}
+#order-info-container .product-details { flex: 1 !important; font-size: 13px !important; min-width: 0 !important; }
+#order-info-container .product-name { font-weight: 600 !important; font-size: 14px !important; margin-bottom: 14px !important; color: #111 !important; }
+#order-info-container .prod-info-row { display: flex !important; margin-bottom: 7px !important; }
+#order-info-container .prod-info-label { width: 140px !important; min-width: 140px !important; color: #555 !important; font-size: 13px !important; }
+#order-info-container .prod-info-value { flex: 1 !important; color: #222 !important; font-size: 13px !important; }
+#order-info-container .prod-total { font-weight: 700 !important; color: #111 !important; }
 
-        footer#dt-footer .footer-bottom-inner {
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            gap:20px;
-            flex-wrap:wrap;
-            padding:30px 0;
-            font-size:16px;
-        }
+#order-info-container .summary-box { border-top: 1px solid #e5e5e5 !important; padding-top: 20px !important; margin-top: 20px !important; }
+#order-info-container .summary-row { display: flex !important; margin-bottom: 10px !important; font-size: 13px !important; }
+#order-info-container .summary-label { width: 210px !important; min-width: 210px !important; color: #444 !important; font-size: 13px !important; }
+#order-info-container .summary-value { flex: 1 !important; color: #111 !important; font-size: 13px !important; }
+#order-info-container .summary-total .summary-label { font-weight: 700 !important; font-size: 14px !important; color: #111 !important; }
+#order-info-container .summary-total .summary-value { font-size: 16px !important; font-weight: 700 !important; color: #d32f2f !important; }
+#order-info-container .summary-deposit .summary-label { font-weight: 700 !important; font-size: 14px !important; color: #084298 !important; }
+#order-info-container .summary-deposit .summary-value { font-size: 16px !important; font-weight: 700 !important; color: #084298 !important; }
 
-        footer#dt-footer .widget_nav_menu .menu {
-            display:flex;
-            flex-wrap:wrap;
-            gap:20px;
-            list-style:none;
-            padding:0;
-            margin:0;
-        }
+#payment-panel {
+    flex: 0 0 370px !important;
+    width: 370px !important;
+    min-width: 370px !important;
+    border: 1px solid #e5e5e5 !important;
+    border-radius: 10px !important;
+    padding: 35px 28px !important;
+    background: #fff !important;
+    margin-top: 48px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+    position: sticky !important;
+    top: 20px !important;
+}
 
-        footer#dt-footer .widget_nav_menu .menu-item a {
-            color:#fff;
-            text-decoration:none;
-            transition:color .2s ease;
-        }
+#payment-panel h3 {
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    margin: 0 0 28px 0 !important;
+    color: #111 !important;
+    text-transform: uppercase !important;
+    text-align: center !important;
+    letter-spacing: 0.5px !important;
+    width: 100% !important;
+}
 
-        footer#dt-footer .widget_nav_menu .menu-item a:hover {
-            color:#f3c;
-        }
+#methods-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 18px !important;
+    width: 100% !important;
+    margin-bottom: 28px !important;
+}
 
-        footer#dt-footer .widget_text p {
-            margin:0;
-        }
+#methods-grid .method {
+    all: unset !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 14px !important;
+    height: 155px !important;
+    border: 1.5px solid #e0e0e0 !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    background: #fff !important;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s !important;
+    box-sizing: border-box !important;
+    padding: 10px !important;
+}
+#methods-grid .method:hover { border-color: #aaa !important; background: #fafafa !important; }
+#methods-grid .method.selected { border-color: #00b8d9 !important; box-shadow: 0 0 0 1.5px #00b8d9 !important; background: #f0faff !important; }
+
+#methods-grid .method img {
+    display: block !important;
+    width: 90px !important;
+    height: 58px !important;
+    object-fit: contain !important;
+    flex-shrink: 0 !important;
+}
+
+#methods-grid .method span {
+    font-size: 12px !important;
+    color: #555 !important;
+    font-style: italic !important;
+    text-align: center !important;
+    line-height: 1.4 !important;
+}
+
+#confirm-payment {
+    all: unset !important;
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    background: #111 !important;
+    color: #fff !important;
+    padding: 13px 0 !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    transition: background 0.2s !important;
+    font-family: 'Roboto', Arial, sans-serif !important;
+}
+#confirm-payment:hover { background: #333 !important; }
+#confirm-payment:disabled { background: #aaa !important; cursor: not-allowed !important; }
+
+footer#dt-footer { background:#FFFFFF; color:#333; font-size:16px; border-top:1px solid #e5e5e5; }
+footer#dt-footer .footer-top .container, footer#dt-footer .footer-bottom .container { max-width:1200px; margin:0 auto; padding:0 20px; }
+footer#dt-footer .footer-top-inner { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; padding:30px 0 20px; border-bottom:4px solid #3dd9e3; }
+footer#dt-footer .reinsurance-line { flex:1; min-width:180px; background:#fff; border-radius:10px; padding:25px; text-align:center; border-left:1px solid rgba(0,0,0,0.08); }
+footer#dt-footer .reinsurance-line:first-child { border-left:none; }
+footer#dt-footer .reinsurance-line a { color:#333; text-decoration:none; display:flex; flex-direction:column; align-items:center; gap:10px; }
+footer#dt-footer .reinsurance-line__icon img { display:block; max-width:42px; height:auto; }
+footer#dt-footer .reinsurance-line__title { display:block; font-size:15px; font-weight:600; }
+footer#dt-footer .footer-bottom-inner { display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; padding:30px 0; font-size:16px; }
+footer#dt-footer .widget_nav_menu .menu { display:flex; flex-wrap:wrap; gap:20px; list-style:none; padding:0; margin:0; }
+footer#dt-footer .widget_nav_menu .menu-item a { color:#333; text-decoration:none; transition:color .2s ease; font-size:14px; }
+footer#dt-footer .widget_nav_menu .menu-item a:hover { color:#0056b3; }
+footer#dt-footer .widget_text p { margin:0; font-size:14px; }
 </style>
 </head>
 <body>
+
 <div class="header">
-    <img src="https://babolat.com.vn/wp-content/uploads/2026/03/1-e1774607603166.png" alt="Babolat Logo">
+    <a href="trangchu.html">
+        <img src="https://babolat.com.vn/wp-content/uploads/2026/03/1-e1774607603166.png" alt="Babolat Logo">
+    </a>
 </div>
 
-<div class="container">
-    <!-- Thông tin đơn hàng -->
-    <div class="order-info">
-        <h2>THÔNG TIN ĐƠN HÀNG</h2>
-        <p><strong>Mã đơn hàng:</strong> 23108</p>
-        <p><strong>Ngày tạo:</strong> 16/05/2026</p>
-        <h3>Thông tin người nhận:</h3>
-        <p>Họ tên: Nguyễn Văn A</p>
-        <p>Địa chỉ: Linh Trung, Thủ Đức, TP.HCM</p>
-        <p>SĐT: 0948.558.670</p>
-        <p>Email: anguyen@gmail.com</p>
-        <p>Ghi chú: Không</p>
+<section class="bank-page-heading">
+    <h1 class="bank-page-title">THANH TOÁN</h1>
+    <p class="bank-page-alert">Vui lòng kiểm tra lại đơn hàng của bạn và chọn phương thức chuyển khoản!</p>
+</section>
 
-        <h3>Chi tiết sản phẩm:</h3>
-        <div class="order-item">
-            <img src="https://babolat.com.vn/wp-content/uploads/2026/04/101564-EVO_AERO_LITE_GEN2-100-1-Face.png" alt="Evo Aero Lite Gen2 Unstrung">
-            <div class="order-item-details">
-                <p><strong>Evo Aero Lite Gen2 Unstrung</strong></p>
-                <p>Màu: Xám | Xanh lá mạ</p>
-                <p>Kích cỡ cán vợt: 2</p>
-                <p>Giá: 4,699,000₫</p>
-                <p>Số lượng: 1</p>
-                <p>Thành tiền: 4,699,000₫</p>
-            </div>
-        </div>
+<div id="bank-layout">
 
-        <div class="order-summary">
-            <table>
-                <tr>
-                    <td>Tạm tính:</td>
-                    <td class="value">4,699,000₫</td>
-                </tr>
-                <tr>
-                    <td>Phương thức vận chuyển:</td>
-                    <td class="value">Giao tiêu chuẩn</td>
-                </tr>
-                <tr>
-                    <td>Phí vận chuyển:</td>
-                    <td class="value">40,000₫</td>
-                </tr>
-                <tr class="total">
-                    <td>Tổng:</td>
-                    <td class="value">4,739,000₫</td>
-                </tr>
-            </table>
-        </div>
+    <div id="order-info-container">
     </div>
 
-    <!-- Phương thức thanh toán -->
-    <div class="payment-method">
+    <div id="payment-panel">
         <h3>CHỌN PHƯƠNG THỨC CHUYỂN KHOẢN</h3>
-        <div class="method" data-method="momo">
-            <img src="https://images.seeklogo.com/logo-png/42/1/momo-logo-png_seeklogo-425716.png" alt="MoMo" style="height: 135px;">
-            <p><i>Ví điện tử MoMo</i></p>
-        </div>
-        <div class="method" data-method="vnpay">
-            <img src="https://cdn.9pay.vn/cong-thanh-toan-vnpay-qr-1686903110.jpg" alt="VNPay" style="height: 135px;">
-            <p><i>QR VNPay</i></p>
+        <div id="methods-grid">
+            <div class="method" data-method="momo">
+                <img src="https://images.seeklogo.com/logo-png/42/1/momo-logo-png_seeklogo-425716.png" alt="MoMo">
+                <span>Ví điện tử MoMo</span>
+            </div>
+            <div class="method" data-method="vnpay">
+                <img src="https://cdn.9pay.vn/cong-thanh-toan-vnpay-qr-1686903110.jpg" alt="VNPay">
+                <span>QR VNPay</span>
+            </div>
         </div>
         <button id="confirm-payment">Xác nhận</button>
     </div>
+
 </div>
 
-<script src="../assets/add-to-cart.min.js"></script>
-<script>
-jQuery(document).ready(function($){
-    $('.payment-method .method').click(function(){
-        $('.payment-method .method').removeClass('selected');
-        $(this).addClass('selected');
-    });
-
-    $('#confirm-payment').click(function(){
-        var selected = $('.payment-method .method.selected').data('method');
-        if(!selected){
-            alert('Vui lòng chọn phương thức thanh toán!');
-            return;
-        }
-        alert('Thanh toán bằng ' + selected + ' sẽ được thực hiện!');
-        // redirect đến cổng thanh toán thật
-    });
-});
-</script>
-
-<!-- Giữ nguyên footer -->
 <footer id="dt-footer">
     <div class="footer-top">
         <div class="container">
@@ -266,5 +280,6 @@ jQuery(document).ready(function($){
     </div>
 </footer>
 
+<script src="../assets/bank.js"></script>
 </body>
 </html>

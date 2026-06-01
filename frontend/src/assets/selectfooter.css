@@ -1,6 +1,6 @@
 #dt-footer {
     background-color: #fff;
-    font-family: Arial, sans-serif;
+  font-family:  system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', Arial, sans-serif;
 }
 
 .footer-top {
@@ -10,20 +10,20 @@
 
 .footer-top-inner {
     display: flex;
-    justify-content: flex-start; /* căn từ trái sang phải */
-    align-items: flex-start;      /* text nằm ngay dưới icon */
+    justify-content: flex-start;
+    align-items: flex-start;
     max-width: 1200px;
     margin: 0 auto;
     flex-wrap: wrap;
     padding: 30px 100px;
-    gap: 50px; /* khoảng cách giữa các icon */
+    gap: 50px;
 }
 
 .reinsurance-line {
     flex: 0 0 auto;
     text-align: left;
     margin-bottom: 15px;
-    margin: 0 20px; /* khoảng cách giữa các icon */
+    margin: 0 20px;
 }
 
 .reinsurance-line__icon img {

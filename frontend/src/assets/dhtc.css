@@ -1,0 +1,134 @@
+.order-success-main {
+    background: #fff;
+  font-family:  system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', Arial, sans-serif;
+    border-top: 4px solid #5ee7ef;
+}
+
+.order-success-main .container {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+.order-success-section {
+    background: #fff;
+    min-height: 700px;
+    padding: 200px 0 150px;
+}
+
+.order-success-content {
+    text-align: center;
+}
+
+.success-icon {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 28px;
+    background: #63c94d;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-icon span {
+    color: #fff;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.order-success-title {
+    margin: 0 0 22px;
+    font-size: 24px;
+    line-height: 1.2;
+    color: #111;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.order-success-desc {
+    margin: 0 auto 32px;
+    max-width: 650px;
+    color: #222;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.order-success-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 65px;
+}
+
+.success-btn {
+    min-width: 145px;
+    height: 38px;
+    padding: 0 24px;
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.success-btn:hover {
+    background: #222;
+    color: #fff;
+}
+
+.call-fixed,
+.messenger-fixed {
+    position: fixed;
+    right: 28px;
+    width: 46px;
+    height: 46px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+}
+
+.call-fixed {
+    top: 52%;
+}
+
+.messenger-fixed {
+    top: calc(52% + 62px);
+}
+
+.call-fixed img,
+.messenger-fixed img {
+    width: 18px;
+    height: 18px;
+}
+
+@media screen and (max-width: 768px) {
+    .order-success-section {
+        padding: 75px 20px;
+        min-height: 360px;
+    }
+
+    .order-success-title {
+        font-size: 20px;
+    }
+
+    .order-success-desc {
+        font-size: 12px;
+    }
+
+    .order-success-actions {
+        gap: 18px;
+        flex-direction: column;
+    }
+
+    .success-btn {
+        width: 190px;
+    }
+}

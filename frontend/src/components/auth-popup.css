@@ -1,0 +1,84 @@
+.auth-account-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-hover-popup {
+  position: absolute;
+  top: 34px;
+  right: -12px;
+  width: 210px;
+  padding: 14px;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all 0.18s ease;
+  font-family: Roboto, Arial, sans-serif;
+}
+
+.auth-account-wrap:hover .auth-hover-popup {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.auth-hover-popup::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 18px;
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  border-left: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
+  transform: rotate(45deg);
+}
+
+.auth-popup-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #252323;
+  margin-bottom: 6px;
+}
+
+.auth-popup-name {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  word-break: break-word;
+}
+
+.auth-popup-btn {
+  width: 100%;
+  height: 38px;
+  border: none;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.auth-popup-login {
+  background: #000000;
+}
+
+.auth-popup-login:hover {
+  background: #252323;
+}
+
+.auth-popup-logout {
+  background: #d71920;
+}
+
+.auth-popup-logout:hover {
+  background: #b9151b;
+}

@@ -1,0 +1,33 @@
+.nav-bar {
+  background: #fff;
+}
+
+.nav-bar ul {
+  align-items: center;
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  list-style: none;
+  margin: 0 auto;
+  max-width: 1200px;
+  min-height: 40px;
+  padding: 0 20px;
+}
+
+.nav-bar a {
+  color: #252323;
+  display: block;
+  font-size: 17.5px;
+  font-weight: 600;
+  padding: 13px 18px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nav-bar a:hover {
+  color: #00b9cc;
+}
+.nav-bar ul {
+    justify-content: flex-start;
+    overflow-x: auto;
+  }

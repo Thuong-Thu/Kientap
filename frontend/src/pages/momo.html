@@ -6,337 +6,194 @@
   <title>MoMo Payment</title>
 
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body{
-      background:#f9f5f7;
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-    }
-
-    /* HEADER */
-    .header{
-      width:100%;
-      height:70px;
-      background:white;
-      border-bottom:1px solid #e5e5e5;
-      display:flex;
-      align-items:center;
-      padding:0 60px;
-    }
-
-    .header img{
-      width:40px;
-      margin-right:15px;
-    }
-
-    .header h2{
-      font-size:22px;
-      color:#444;
-      font-weight:500;
-    }
-
-    /* MAIN */
-    .container{
-        flex:1;
-        display:flex;
-        justify-content:space-between;
-        align-items:flex-start;
-        gap:60px;
-        padding:60px;
-        max-width:1200px;
-        margin:0 auto;
-    }
-
-    /* LEFT CARD */
-    .order-box{
-      width:300px;
-      background:white;
-      border-radius:8px;
-      padding:25px;
-      box-shadow:0 2px 10px rgba(0,0,0,0.05);
-    }
-
-    .order-box h3{
-      font-size:24px;
-      color:#333;
-      margin-bottom:20px;
-      font-weight:600;
-    }
-
-    .label{
-      color:#999;
-      font-size:14px;
-      margin-top:15px;
-    }
-
-    .value{
-      color:#333;
-      font-size:18px;
-      margin-top:5px;
-      font-weight:500;
-    }
-
-    .supplier{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-top:10px;
-    }
-
-    .supplier img{
-      width:50px;
-    }
-
-    .supplier p{
-      font-size:14px;
-      color:#444;
-      line-height:1.4;
-    }
-
-    hr{
-      margin:18px 0;
-      border:none;
-      border-top:1px solid #eee;
-    }
-
-    .money{
-      font-size:24px;
-      font-weight:bold;
-      color:#49424E;
-      margin-top:10px;
-    }
-
-    /* TIMER */
-    .timer-wrap{
-      margin-top:30px;
-      text-align:center;
-    }
-
-    .timer-title{
-      color:#DC1A8D;
-      margin-bottom:15px;
-      font-size:16px;
-    }
-
-    .timer{
-      display:flex;
-      justify-content:center;
-      gap:15px;
-    }
-
-    .time-box{
-      width:80px;
-      height:80px;
-      background:#fff0f6;
-      border-radius:8px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-    }
-
-    .time-box span:first-child{
-      color:#DC1A8D;
-      font-size:28px;
-      font-weight:bold;
-    }
-
-    .time-box span:last-child{
-      color:#D11986;
-      font-size:14px;
-      fill:#FFF0F6
-    }
-
-    .back{
-      margin-top:20px;
-      text-align:center;
-      color:#DC1A8D;
-      cursor:pointer;
-      font-size:15px;
-    }
-
-    .qr-box{
-        width:420px;
-    }
-
-    .qr{
-        width:100%;
-        background:white;
-        padding:20px;
-        border-radius:12px;
-        margin:0;
-    }
-
-    .qr img{
-        width:100%;
-        display:block;
-    }
-
-    .top-brand{
-      background:white;
-      border-radius:8px;
-      padding:8px 12px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:25px;
-    }
-
-    .top-brand img{
-      height:30px;
-      object-fit:contain;
-    }
-
-    .qr-text{
-      margin-top:25px;
-      font-size:18px;
-      line-height:1.5;
-    }
-
-    .help{
-      margin-top:20px;
-      font-size:14px;
-      opacity:0.9;
-    }
-
-    .check-order{
-      margin-top:25px;
-      font-size:14px;
-      text-align: center;
-      cursor:pointer;
-      color:#DC1A8D;
-    }
-
-    /* FOOTER */
-    footer{
-      height:60px;
-      background:#f3f3f3;
-      border-top:1px solid #ddd;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:0 60px;
-      font-size:13px;
-      color:#777;
-    }
-
-    footer a{
-      color:#0b6cff;
-      text-decoration:none;
-    }
-
-    @media(max-width:900px){
-      .container{
-        flex-direction:column;
-      }
-
-      .qr-box{
-        width:100%;
-        max-width:420px;
-      }
-    }
+    *{ margin:0; padding:0; box-sizing:border-box; font-family: Arial, Helvetica, sans-serif; }
+    body{ background:#f9f5f7; min-height:100vh; display:flex; flex-direction:column; }
+    .header{ width:100%; height:70px; background:white; border-bottom:1px solid #e5e5e5; display:flex; align-items:center; padding:0 60px; }
+    .header img{ width:40px; margin-right:15px; }
+    .header h2{ font-size:22px; color:#444; font-weight:500; }
+    .container{ flex:1; display:flex; justify-content:space-between; align-items:flex-start; gap:60px; padding:60px; max-width:1200px; margin:0 auto; }
+    .order-box{ width:300px; background:white; border-radius:8px; padding:25px; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
+    .order-box h3{ font-size:24px; color:#333; margin-bottom:20px; font-weight:600; }
+    .label{ color:#999; font-size:14px; margin-top:15px; }
+    .value{ color:#333; font-size:18px; margin-top:5px; font-weight:500; }
+    .supplier{ display:flex; align-items:center; gap:10px; margin-top:10px; }
+    .supplier img{ width:50px; }
+    .supplier p{ font-size:14px; color:#444; line-height:1.4; }
+    hr{ margin:18px 0; border:none; border-top:1px solid #eee; }
+    .money{ font-size:24px; font-weight:bold; color:#49424E; margin-top:10px; }
+    .timer-wrap{ margin-top:30px; text-align:center; }
+    .timer-title{ color:#DC1A8D; margin-bottom:15px; font-size:16px; }
+    .timer{ display:flex; justify-content:center; gap:15px; }
+    .time-box{ width:80px; height:80px; background:#fff0f6; border-radius:8px; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+    .time-box span:first-child{ color:#DC1A8D; font-size:28px; font-weight:bold; }
+    .time-box span:last-child{ color:#D11986; font-size:14px; }
+    .back{ margin-top:20px; text-align:center; color:#DC1A8D; cursor:pointer; font-size:15px; }
+    .qr-box{ width:420px; text-align: center; }
+    .qr{ width:100%; background:white; padding:20px; border-radius:12px; margin:0; }
+    .qr img{ width:100%; display:block; }
+    .btn-mock { margin-top: 15px; width: 100%; padding: 14px; border-radius: 8px; border: none; background: #DC1A8D; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s;}
+    .btn-mock:hover { background: #b0106e; }
+    .btn-cancel { margin-top: 10px; width: 100%; padding: 14px; border-radius: 8px; border: 1.5px solid #DC1A8D; background: #fff; color: #DC1A8D; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+    .btn-cancel:hover { background: #fff0f6; }
+    footer{ height:60px; background:#f3f3f3; border-top:1px solid #ddd; display:flex; justify-content:space-between; align-items:center; padding:0 60px; font-size:13px; color:#777; }
+    footer a{ color:#0b6cff; text-decoration:none; }
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
   <div class="header">
-    <img src="https://images.seeklogo.com/logo-png/42/1/momo-logo-png_seeklogo-425716.png" alt="MoMo"">
+    <img src="https://images.seeklogo.com/logo-png/42/1/momo-logo-png_seeklogo-425716.png" alt="MoMo">
     <h2>Cổng thanh toán MoMo</h2>
   </div>
 
-  <!-- MAIN -->
   <div class="container">
-
-    <!-- LEFT -->
     <div>
       <div class="order-box">
-
         <h3>Thông tin đơn hàng</h3>
-
         <div class="label">Nhà cung cấp</div>
-
         <div class="supplier">
-          <img src="../../public/logo.png" alt="Babolat Logo">
-          <p>
-            CÔNG TY TNHH<br>
-            TMTT HỒNG ÂN<br>
-            BABOLAT VIỆT NAM
-          </p>
+          <img src="https://babolat.com.vn/wp-content/uploads/2026/03/1-e1774607603166.png" alt="Babolat">
+          <p>CÔNG TY TNHH<br>TMTT HỒNG ÂN<br>BABOLAT VIỆT NAM</p>
         </div>
 
         <hr>
-
         <div class="label">Mã đơn hàng</div>
-        <div class="value">45303634</div>
+        <div class="value" id="momo-order-code">Đang tải...</div>
 
         <hr>
-
         <div class="label">Mô tả</div>
-        <div class="value">Mã đơn hàng 23108</div>
+        <div class="value" id="momo-order-desc">Đang tải...</div>
 
         <hr>
-
         <div class="label">Số tiền</div>
-        <div class="money">4.739.000đ</div>
-
+        <div class="money" id="momo-order-amount">0đ</div>
       </div>
 
-      <!-- TIMER -->
       <div class="timer-wrap">
         <div class="timer-title">Đơn hàng sẽ hết hạn sau:</div>
-
         <div class="timer">
-          <div class="time-box">
-            <span>09</span>
-            <span>Phút</span>
-          </div>
-
-          <div class="time-box">
-            <span>59</span>
-            <span>Giây</span>
-          </div>
+          <div class="time-box"><span id="momo-min">09</span><span>Phút</span></div>
+          <div class="time-box"><span id="momo-sec">59</span><span>Giây</span></div>
         </div>
-
-        <div class="back">Quay về</div>
+        <div class="back" id="btn-cancel-momo">Quay về / Hủy giao dịch</div>
       </div>
     </div>
 
-    <!-- RIGHT -->
     <div class="qr-box">
-
-
       <div class="qr">
-        <img src="../../public/qrmomo.png">
+        <img src="../../public/qrmomo.png" alt="QR Code">
       </div>
-
-      <div class="check-order">
-        Kiểm tra đơn hàng
-      </div>
-
+      <button class="btn-mock" id="btn-mock-success">Đã thanh toán (Click để Test)</button>
+      <button class="btn-cancel" id="btn-cancel-momo2">Hủy thanh toán</button>
     </div>
-
   </div>
 
-  <!-- FOOTER -->
   <footer>
-    <div>© 2023 - Cổng thanh toán MoMo</div>
-
-    <div>
-      Hỗ trợ khách hàng:
-      <a href="#">1900 5454 41</a>
-      |
-      <a href="#">hotro@momo.vn</a>
-    </div>
+    <div>© 2026 - Cổng thanh toán MoMo</div>
+    <div>Hỗ trợ khách hàng: <a href="#">1900 5454 41</a> | <a href="#">hotro@momo.vn</a></div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const orderData = JSON.parse(localStorage.getItem('pendingOrder'));
+      if (!orderData || !orderData.donHangId) {
+        alert("Thông tin đơn hàng không hợp lệ!");
+        window.location.href = "trangchu.html";
+        return;
+      }
+
+      document.getElementById('momo-order-code').textContent = orderData.maDonHang;
+      document.getElementById('momo-order-desc').textContent = "Thanh toán Babolat - " + orderData.maDonHang;
+      document.getElementById('momo-order-amount').textContent = Number(orderData.soTienDangGiaoDich || orderData.tongTien).toLocaleString('vi-VN') + 'đ';
+
+      let totalSeconds = 60; 
+      const countdown = setInterval(async () => {
+        if (totalSeconds <= 0) {
+          clearInterval(countdown);
+          await fetch(`http://localhost:3000/api/don-hang/${orderData.donHangId}/huy-tu-dong`, { method: 'PUT' });
+          window.location.href = 'paythatbai.html';
+          return;
+        }
+        totalSeconds--;
+        document.getElementById('momo-min').textContent = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+        document.getElementById('momo-sec').textContent = String(totalSeconds % 60).padStart(2, '0');
+      }, 1000);
+
+      async function clearPurchasedItems() {
+          if (!orderData || !orderData.items) return;
+          const purchasedIds = orderData.items.map(i => String(i.bienTheId || i.BIEN_THE_ID));
+
+          let guestCart = JSON.parse(localStorage.getItem('guestCartItems')) || [];
+          if (guestCart.length > 0) {
+              guestCart = guestCart.filter(item => !purchasedIds.includes(String(item.bienTheId || item.BIEN_THE_ID)));
+              localStorage.setItem('guestCartItems', JSON.stringify(guestCart));
+          }
+
+          let currentUser = null;
+          try { currentUser = JSON.parse(localStorage.getItem('currentUser')); } catch (e) {}
+          if (currentUser && currentUser.id) {
+              try {
+                  const res = await fetch(`http://localhost:3000/api/gio-hang?userId=${currentUser.id}`);
+                  const cartResult = await res.json();
+                  if (cartResult.ok && cartResult.data && cartResult.data.items) {
+                      for (const cartItem of cartResult.data.items) {
+                          if (purchasedIds.includes(String(cartItem.bienTheId))) {
+                              await fetch(`http://localhost:3000/api/gio-hang/${cartItem.chiTietId}`, { method: 'DELETE' });
+                          }
+                      }
+                  }
+              } catch (e) { console.error("Lỗi xóa giỏ hàng DB", e); }
+          }
+
+          localStorage.removeItem('selectedCartItems');
+      }
+
+      document.getElementById('btn-mock-success').onclick = async function() {
+          this.disabled = true;
+          this.textContent = "Đang xác nhận...";
+          clearInterval(countdown);
+
+          try {
+              const response = await fetch('http://localhost:3000/api/xac-nhan-thanh-toan-thanh-cong', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ donHangId: orderData.donHangId })
+              });
+              const result = await response.json();
+              if(result.ok) {
+                  await clearPurchasedItems(); 
+                  window.location.href = 'paythanhcong.html'; 
+              } else {
+                  alert("Lỗi: " + result.error);
+                  this.disabled = false;
+                  this.textContent = "Đã thanh toán (Click để Test)";
+              }
+          } catch(e) {
+              alert("Lỗi kết nối máy chủ");
+              this.disabled = false;
+              this.textContent = "Đã thanh toán (Click để Test)";
+          }
+      };
+
+      function huyThanhToan() {
+        if (orderData) {
+          delete orderData.soTienDangGiaoDich;
+          localStorage.setItem('pendingOrder', JSON.stringify(orderData));
+        }
+        window.location.href = 'bank.html';
+      }
+
+      document.getElementById('btn-cancel-momo').onclick = function() {
+        clearInterval(countdown);
+        huyThanhToan();
+      };
+
+      document.getElementById('btn-cancel-momo2').onclick = function() {
+        clearInterval(countdown);
+        huyThanhToan();
+      };
+    });
+  </script>
 </body>
 </html>

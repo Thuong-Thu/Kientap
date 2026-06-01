@@ -5,328 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thanh toán VNPay</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    background: #f4f6fb;
-    margin: 0;
-    padding: 0;
-    color: #1f2937;
-}
-* {
-    box-sizing: border-box;
-}
-.page-shell {
-    max-width: auto;
-    margin: 0 auto;
-    padding: 0 20px 0;
-}
-.topbar {
-       display: flex;
-
-       justify-content: space-between;
-       gap: 24px;
-       padding: 18px 24px;
-       background: #ffffff;
-       /* extend to match .page-shell inner width (page-shell has 20px horizontal padding) */
-       width: calc(100% + 40px);
-       margin: 0 -20px 0;
-       box-sizing: border-box;
-}
-.topbar-left,
-.topbar-center,
-.topbar-right {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-.topbar-left {
-    min-width: 240px;
-}
-.back-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: #eff6ff;
-    color: #1d4ed8;
-    text-decoration: none;
-    font-size: 18px;
-    border: 1px solid #dbeafe;
-}
-.topbar-logo {
-    display: flex;
-    align-items: center;
-    gap: 70px;
-    
-}
-.topbar-logo img {
-    height: 60px;
-}
-
-.topbar-logo-text span {
-    font-size: 12px;
-    color: #2563eb;
-    font-weight: 700;
-}
-.topbar-center {
-    flex: 1;
-    justify-content: center;
-}
-.topbar-center img {
-    height: 70px;
-}
-.topbar-right {
-    justify-content: flex-end;
-}
-.timer-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 6px;
-    text-align: right;
-}
-.timer-info span {
-    color: #475569;
-    font-size: 13px;
-}
-.timer-pill {
-    min-width: 96px;
-    padding: 12px 16px;
-    border-radius: 14px;
-    background: #0f172a;
-    color: #ffffff;
-    font-weight: 700;
-    text-align: center;
-}
-.alert-banner {
-    margin: 24px 0;
-    padding: 16px 20px;
-    background: #fff7ed;
-    border: 1px solid #ffddb6;
-    border-radius: 16px;
-    color: #92400e;
-    font-size: 14px;
-    text-align: center;
-    line-height: 1.7;
-}
-.main-grid {
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 30px;
-    align-items: start;
-}
-.card {
-    background: #ffffff;
-    border-radius: 24px;
-    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
-    padding: 28px;
-}
-.order-card {
-    background: #eff6ff;
-    border: 1px solid #d7eafc;
-}
-.card-title {
-    margin: 0 0 16px;
-    font-size: 25px;
-    text-align: center;
-    font-weight: 700;
-}
-.card-divider {
-    height: 1px;
-    background: #d9e7fb;
-    border: none;
-    margin: 0 0 22px;
-}
-.order-detail {
-    display: grid;
-    gap: 18px;
-}
-.order-row {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 6px;
-    padding: 12px 0;
-}
-.order-row:last-child {
-    padding-bottom: 0;
-}
-.order-label {
-    color: #475569;
-    font-size: 15px;
-    line-height: 1.0;
-}
-.order-value {
-    text-align: left;
-    font-size: 18px;
-    font-weight: 600;
-    color: #21262C;
-    line-height: 1.7;
-}
-.order-value.amount {
-    color: #2563eb;
-    font-size: 25px;
-}
-.order-value.multiline {
-    font-size: 18px;
-    font-weight: 500;
-    color: #241920;
-    white-space: pre-wrap;
-    text-align: left;
-}
-.payment-card {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-.payment-hint {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    color: #2563eb;
-    font-size: 14px;
-    font-weight: 700;
-    text-decoration: none;
-}
-.payment-hint::before {
-    content: "i";
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #dbeafe;
-    color: #2563eb;
-    font-size: 12px;
-}
-.qr-panel {
-    padding: 24px;
-    border-radius: 20px;
-    background: #ffffff;
-    border: 1px solid #dbeafe;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-}
-.qr-panel img {
-    width: 100%;
-    max-width: 280px;
-    height: auto;
-    object-fit: contain;
-    border-radius: 12px;
-}
-.qr-caption {
-    font-size: 13px;
-    font-weight: 700;
-    color: #2563eb;
-}
-.action-group {
-    display: grid;
-    gap: 14px;
-    margin-top: 6px;
-}
-.button {
-    width: 100%;
-    padding: 14px 18px;
-    border: none;
-    border-radius: 14px;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-}
-.button-secondary {
-    background: #F5F7F9;
-    color: #111827;
-}
-.button-primary {
-    background: #A9C1DB;
-    color: #ffffff;
-}
-.footer {
-    margin-top: 38px;
-    padding: 0;
-    font-size: 13px;
-    color: #64748b;
-    background: #F9F9F9;
-    border-radius: 0;
-    /* make full-bleed under the page-shell similar to topbar */
-    width: calc(100% + 40px);
-    margin: 0 -20px 0;
-    box-sizing: border-box;
-    height: 106px;
-    display: flex;
-    align-items: center;
-}
-.footer-inner {
-    max-width: 1240px;
-    margin: 0 auto;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-.footer-left {
-    text-align: left;
-}
-.footer-center {
-    text-align: center;
-    line-height: 1.25;
-}
-.footer-right {
-    text-align: right;
-}
-.footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-.footer-logo img {
-    height: 26px;
-    display: block;
-}
-.footer-logo img.small-mobile {
-    height: 20px;
-}
-.footer a {
-    color: #2563eb;
-    text-decoration: none;
-}
-@media (max-width: 1024px) {
-    .main-grid {
-        grid-template-columns: 1fr;
-    }
-    .topbar {
-        flex-wrap: wrap;
-        justify-content: center;
-        text-align: center;
-    }
-    .topbar-left,
-    .topbar-center,
-    .topbar-right {
-        width: 100%;
-        justify-content: center;
-        text-align: center;
-    }
-    .order-row {
-        grid-template-columns: 1fr;
-        text-align: left;
-    }
-    .order-value,
-    .order-value.multiline {
-        text-align: left;
-    }
-}
+body { font-family: Arial, sans-serif; background: #f4f6fb; margin: 0; padding: 0; color: #1f2937; }
+* { box-sizing: border-box; }
+.page-shell { max-width: auto; margin: 0 auto; padding: 0 20px 0; }
+.topbar { display: flex; justify-content: space-between; gap: 24px; padding: 18px 24px; background: #ffffff; width: calc(100% + 40px); margin: 0 -20px 0; box-sizing: border-box; border-bottom: 1px solid #eee; }
+.topbar-left, .topbar-center, .topbar-right { display: flex; align-items: center; gap: 16px; }
+.topbar-left { min-width: 240px; }
+.back-link { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: #eff6ff; color: #1d4ed8; text-decoration: none; font-size: 18px; border: 1px solid #dbeafe; }
+.topbar-logo img { height: 60px; }
+.topbar-center img { height: 70px; }
+.timer-info { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; text-align: right; }
+.timer-info span { color: #475569; font-size: 13px; }
+.timer-pill { min-width: 96px; padding: 12px 16px; border-radius: 14px; background: #0f172a; color: #ffffff; font-weight: 700; text-align: center; }
+.alert-banner { margin: 24px 0; padding: 16px 20px; background: #fff7ed; border: 1px solid #ffddb6; border-radius: 16px; color: #92400e; font-size: 14px; text-align: center; line-height: 1.7; }
+.main-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 30px; align-items: start; max-width: 1100px; margin: 0 auto; }
+.card { background: #ffffff; border-radius: 24px; box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08); padding: 28px; }
+.order-card { background: #eff6ff; border: 1px solid #d7eafc; }
+.card-title { margin: 0 0 16px; font-size: 25px; text-align: center; font-weight: 700; }
+.order-detail { display: grid; gap: 18px; }
+.order-row { display: grid; grid-template-columns: 1fr; gap: 6px; padding: 12px 0; }
+.order-label { color: #475569; font-size: 15px; line-height: 1.0; }
+.order-value { text-align: left; font-size: 18px; font-weight: 600; color: #21262C; line-height: 1.7; }
+.order-value.amount { color: #2563eb; font-size: 25px; }
+.qr-panel { padding: 24px; border-radius: 20px; background: #ffffff; border: 1px solid #dbeafe; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.qr-panel img { width: 100%; max-width: 280px; height: auto; object-fit: contain; border-radius: 12px; }
+.button { width: 100%; padding: 14px 18px; border: none; border-radius: 14px; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+.button-primary { background: #2563eb; color: #fff; margin-top: 15px; }
+.button-primary:hover { background: #1d4ed8; }
+.button-secondary { background: #F5F7F9; color: #111827; }
+.footer { margin-top: 38px; background: #F9F9F9; width: calc(100% + 40px); margin: 0 -20px 0; height: 106px; display: flex; align-items: center; }
+.footer-inner { max-width: 1240px; margin: 0 auto; width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
 </style>
 </head>
 <body>
 <div class="page-shell">
     <div class="topbar">
         <div class="topbar-left">
-            <a class="back-link" href="#" title="Quay lại">←</a>
+            <a class="back-link" href="#" id="btn-back-vnpay" title="Quay lại">←</a>
             <div class="topbar-logo">
                 <img src="../../public/logovnpay.png" alt="VNPay QR">
             </div>
@@ -337,7 +52,7 @@ body {
         <div class="topbar-right">
             <div class="timer-info">
                 <span>Giao dịch hết hạn sau</span>
-                <div class="timer-pill">12 : 29</div>
+                <div class="timer-pill" id="vnpay-timer">10 : 00</div>
             </div>
         </div>
     </div>
@@ -349,15 +64,15 @@ body {
     <div class="main-grid">
         <section class="card order-card">
             <h2 class="card-title" style="text-align: left">Thông tin đơn hàng</h2>
-            <hr class="card-divider">
+            <hr style="height: 1px; background: #d9e7fb; border: none; margin: 0 0 22px;">
             <div class="order-detail">
                 <div class="order-row">
                     <div class="order-label">Số tiền thanh toán</div>
-                    <div class="order-value amount">4.739.000 VND</div>
+                    <div class="order-value amount" id="vnp-amount">0 VND</div>
                 </div>
                 <div class="order-row">
                     <div class="order-label">Giá trị đơn hàng</div>
-                    <div class="order-value">4.739.000 VND</div>
+                    <div class="order-value" id="vnp-total">0 VND</div>
                 </div>
                 <div class="order-row">
                     <div class="order-label">Phí giao dịch</div>
@@ -365,11 +80,11 @@ body {
                 </div>
                 <div class="order-row">
                     <div class="order-label">Mã đơn hàng</div>
-                    <div class="order-value">45310227</div>
+                    <div class="order-value" id="vnp-code">...</div>
                 </div>
                 <div class="order-row">
                     <div class="order-label">Nội dung giao dịch</div>
-                    <div class="order-value multiline">Babolat Việt Nam Mã đơn hàng 23108</div>
+                    <div class="order-value multiline" id="vnp-desc">...</div>
                 </div>
                 <div class="order-row">
                     <div class="order-label">Nhà cung cấp</div>
@@ -379,36 +94,136 @@ body {
         </section>
 
         <section class="card payment-card">
-            <h2 class="card-title">Quét mã qua App Ngân hàng / Ví điện tử</h2>
-            <a class="payment-hint" href="#">Hướng dẫn thanh toán</a>
+            <h2 class="card-title">Quét mã qua App Ngân hàng</h2>
             <div class="qr-panel">
                 <img src="../../public/qr.png" alt="Mã QR VNPay">
-                <div class="qr-caption">Scan to Pay</div>
+                <button class="button button-primary" id="btn-mock-success">Đã thanh toán (Click để Test)</button>
             </div>
-            <div class="action-group">
-                <button class="button button-secondary">Hủy thanh toán</button>
-                <button class="button button-primary">Kiểm tra đơn hàng</button>
+            <div style="margin-top: 20px;">
+                <button class="button button-secondary" id="btn-cancel-vnpay">Hủy thanh toán</button>
             </div>
         </section>
     </div>
 
     <div class="footer">
         <div class="footer-inner">
-            <div class="footer-left">
-                <span>Phát triển bởi VNPAY © 2026</span>
-            </div>
-            <div class="footer-center">
-                <div>Hỗ trợ khách hàng</div>
-                <div>1900 55 55 77 · <a href="mailto:hotrovnpay@vnpay.vn">hotrovnpay@vnpay.vn</a></div>
-            </div>
-            <div class="footer-right">
-                <div class="footer-logo">
-                    <img src="../../public/global-sign 1.png" alt="Secure GlobalSign">
-                    <img src="../../public/pci dss 1.png" alt="PCI DSS Compliant">
-                </div>
-            </div>
+            <div class="footer-left"><span>Phát triển bởi VNPAY © 2026</span></div>
+            <div style="text-align: center">Hỗ trợ khách hàng: 1900 55 55 77</div>
+            <div class="footer-right">VNPay Security</div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const orderData = JSON.parse(localStorage.getItem('pendingOrder'));
+        
+        if (!orderData || !orderData.donHangId) {
+            alert("Thông tin đơn hàng không hợp lệ!");
+            window.location.href = "trangchu.html";
+            return;
+        }
+
+        const amountToPay = Number(orderData.soTienDangGiaoDich || orderData.tongTien);
+        const formattedAmount = amountToPay.toLocaleString('vi-VN') + ' VND';
+        document.getElementById('vnp-amount').textContent = formattedAmount;
+        document.getElementById('vnp-total').textContent = Number(orderData.tongTien).toLocaleString('vi-VN') + ' VND';
+        document.getElementById('vnp-code').textContent = orderData.maDonHang;
+        document.getElementById('vnp-desc').textContent = "Babolat Việt Nam - Mã đơn hàng " + orderData.maDonHang;
+
+        let totalSeconds = 15; 
+        const timerInterval = setInterval(async () => {
+            if (totalSeconds <= 0) {
+                clearInterval(timerInterval);
+                try {
+                    await fetch(`http://localhost:3000/api/don-hang/${orderData.donHangId}/huy-tu-dong`, { method: 'PUT' });
+                } catch(e) {}
+                
+                window.location.href = 'paythatbai.html';
+                return;
+            }
+
+            totalSeconds--;
+            const m = Math.floor(totalSeconds / 60);
+            const s = totalSeconds % 60;
+            document.getElementById('vnpay-timer').textContent = `${String(m).padStart(2, '0')} : ${String(s).padStart(2, '0')}`;
+        }, 1000);
+
+        async function clearPurchasedItems() {
+            if (!orderData || !orderData.items) return;
+            const purchasedIds = orderData.items.map(i => String(i.bienTheId || i.BIEN_THE_ID));
+
+            let guestCart = JSON.parse(localStorage.getItem('guestCartItems')) || [];
+            if (guestCart.length > 0) {
+                guestCart = guestCart.filter(item => !purchasedIds.includes(String(item.bienTheId || item.BIEN_THE_ID)));
+                localStorage.setItem('guestCartItems', JSON.stringify(guestCart));
+            }
+
+            let currentUser = null;
+            try { currentUser = JSON.parse(localStorage.getItem('currentUser')); } catch (e) {}
+            if (currentUser && currentUser.id) {
+                try {
+                    const res = await fetch(`http://localhost:3000/api/gio-hang?userId=${currentUser.id}`);
+                    const cartResult = await res.json();
+                    if (cartResult.ok && cartResult.data && cartResult.data.items) {
+                        for (const cartItem of cartResult.data.items) {
+                            if (purchasedIds.includes(String(cartItem.bienTheId))) {
+                                await fetch(`http://localhost:3000/api/gio-hang/${cartItem.chiTietId}`, { method: 'DELETE' });
+                            }
+                        }
+                    }
+                } catch (e) { console.error("Lỗi xóa giỏ hàng DB", e); }
+            }
+
+            localStorage.removeItem('selectedCartItems');
+        }
+
+        document.getElementById('btn-mock-success').onclick = async function() {
+            this.disabled = true;
+            this.textContent = "Đang xác nhận...";
+            clearInterval(timerInterval); // Dừng đếm ngược
+
+            try {
+                const response = await fetch('http://localhost:3000/api/xac-nhan-thanh-toan-thanh-cong', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ donHangId: orderData.donHangId })
+                });
+                const result = await response.json();
+                if(result.ok) {
+                    await clearPurchasedItems();
+                    window.location.href = 'paythanhcong.html';
+                } else {
+                    alert("Lỗi: " + result.error);
+                    this.disabled = false;
+                    this.textContent = "Đã thanh toán (Click để Test)";
+                }
+            } catch(e) {
+                alert("Lỗi kết nối máy chủ");
+                this.disabled = false;
+                this.textContent = "Đã thanh toán (Click để Test)";
+            }
+        };
+
+        function huyThanhToan() {
+            if (orderData) {
+                delete orderData.soTienDangGiaoDich;
+                localStorage.setItem('pendingOrder', JSON.stringify(orderData));
+            }
+            window.location.href = 'bank.html';
+        }
+
+        document.getElementById('btn-back-vnpay').onclick = function(e) {
+            e.preventDefault();
+            clearInterval(timerInterval);
+            huyThanhToan();
+        };
+
+        document.getElementById('btn-cancel-vnpay').onclick = function() {
+            clearInterval(timerInterval);
+            huyThanhToan();
+        };
+    });
+</script>
 </body>
 </html>
